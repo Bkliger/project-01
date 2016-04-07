@@ -1,8 +1,5 @@
 var db = require("./models");
 
-
-
-
 var Users =[
   {
         name: 'George Washington',
@@ -38,32 +35,14 @@ var Users =[
       }
 ];
 
-var Events = [
-  {
-        date_from: '10/01/2016',
-        date_to: '10/10/2016',
-        day_of_week: "Weekday",
-        minimum_level: '4',
-        participants: [{requested_instrument: "1st Violin"},{requested_instrument: "2nd Violin"},{requested_instrument: "Viola"},{requested_instrument: "Cello"}]
-      }
 
 
+db.User.remove({}, function(err, users){
 
-
-
-
-
-
-
-];
-
-
-db.Album.remove({}, function(err, albums){
-
-  db.Album.create(albumsList, function(err, albums){
-    if (err) { return console.log('ERROR', err); }
-    console.log("all albums:", albums);
-    console.log("created", albums.length, "albums");
+  db.User.create(Users, function(err, users){
+    if (err) { return console.log('ERROR loading users', err); }
+    console.log("all users:", users);
+    console.log("created", users.length, "users");
     process.exit();
   });
 });

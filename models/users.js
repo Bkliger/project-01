@@ -1,18 +1,20 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
-var Song = require('./song.js');
+var Event = require('./events.js');
 
 
-var AlbumSchema = new Schema({
-  artistName: String,
+var UserSchema = new Schema({
   name: String,
-  releaseDate: String,
-  genres: [String],
-  song: [Song.schema]
+  street_address: String,
+  city: String,
+  state: String,
+  zip: String,
+  level: Number,
+  event: [{type: Schema.Types.ObjectId, ref: 'Event'}]
 });
 
 
 
-var Album = mongoose.model('Album', AlbumSchema);
+var User = mongoose.model('User', UserSchema);
 
-module.exports = Album;
+module.exports = User;

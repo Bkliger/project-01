@@ -1,5 +1,5 @@
 var express = require('express'),
-    // db = require('./models'),
+    db = require('./models'),
     bodyParser = require('body-parser'),
     app = express();
 
@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/vendor', express.static(__dirname + '/bower_components'));
 
 // var controllers = require('./controllers');
+var controllers = require('./controllers');
 
 
 //load index.html
@@ -21,7 +22,8 @@ app.get('/', function homepage (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-
+//routes
+app.post('/api/users', controllers.usersController.create);
 
 
 
