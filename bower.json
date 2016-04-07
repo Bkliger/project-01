@@ -1,0 +1,22 @@
+{
+  "name": "project-01",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "Bkliger <bkliger@comcast.net>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Bkliger/project-01",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.3",
+    "bootstrap": "^3.3.6",
+    "handlebars": "^4.0.5"
+  }
+}
