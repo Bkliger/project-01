@@ -2,6 +2,7 @@ $(document).ready(function() {
     console.log("app.js is loaded");
     $form = $("#user_profile_form");
     data = $form.serializeArray();
+    console.log(data);
 
     //handlebars
     var source = $("#event_template").html();
@@ -10,7 +11,7 @@ $(document).ready(function() {
     //load event list right away
 
     function getAllEvents() {
-        console.log('executing get all')
+        console.log('executing get all');
         $.ajax({
             method: "GET",
             url: '/api/events',
@@ -20,7 +21,10 @@ $(document).ready(function() {
     }
     //Save user profile data
     $form.on("submit", function(e) {
-        console.log("form button clicked");
+        data = $form.serializeArray();
+        console.log("1",data);
+
+        console.log("2","form button clicked");
         e.preventDefault();
         $.ajax({
             method: "POST",
@@ -44,6 +48,16 @@ $(document).ready(function() {
     //   });
     // });
     //pop up modal to add event
+
+    // when the edit button for an album is clicked
+
+    $('#edit-event').on('click', function(e){
+      var user_id = $(this).closest('.event').attr(data-user-id);
+
+    });
+
+
+
     $('#newEventButton').on('click', function(e) {
         id = $form.attr("data-user_id");
         console.log(id);
@@ -83,6 +97,34 @@ function handleGetAllEvents(json) {
         renderEvent(event);
     });
 }
+
+function handleEventEditClick(e) {
+  var $eventRow = $(this).closest('.event');
+  var eventId = $eventRow.attr("data-event-id");
+  console.log('edit event', eventId);
+
+  // // show the save changes button
+  // $albumRow.find('.save-album').toggleClass('hidden');
+  // // hide the edit button
+  // $albumRow.find('.edit-album').toggleClass('hidden');
+
+  //place something on the modal
+
+  // $('#level')=$eventRow.attr("data-event-id");
+
+  // // get the album name and replace its field with an input element
+  // var albumName = $albumRow.find('span.album-name').text();
+  // $albumRow.find('span.album-name').html('<input class="edit-album-name" value="' + albumName + '"></input>');
+  //
+  // // get the artist name and replace its field with an input element
+  // var artistName = $albumRow.find('span.artist-name').text();
+  // $albumRow.find('span.artist-name').html('<input class="edit-artist-name" value="' + artistName + '"></input>');
+  //
+  // // get the releasedate and replace its field with an input element
+  // var releaseDate = $albumRow.find('span.album-releaseDate').text();
+  // $albumRow.find('span.album-releaseDate').html('<input class="edit-album-releaseDate" value="' + releaseDate + '"></input>');
+}
+
 
 function getAllError(err) {
     console.log("get all events error");

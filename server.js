@@ -43,25 +43,23 @@ var controllers = require('./controllers');
 //HTML Routes
 //load index.html
 app.get('/', function homepage (req, res) {
-  res.sendFile(__dirname + '/views/index.html',{
-    user: JSON.stringify(req.user) + "|| null"
-  });
+  res.sendFile(__dirname + '/views/index.html');
 });
 
 
 
 // show signup view
 app.get('/signup', function (req, res) {
-res.sendfile('./views/signup');
+  res.sendFile(__dirname + '/views/signup.html');
+});
   // res.render('signup'); // you can also use res.sendFile
 // res.status(200).send("pong!");
 
 // show login view
 app.get('/login', function (req, res) {
-  res.render('login'); // you can also use res.sendFile
+  res.sendFile(__dirname + '/views/login.html');
 });
 
-});
 
 
 
@@ -81,7 +79,7 @@ app.post('/signup', function (req, res) {
   User.register(new User({ username: req.body.username }), req.body.password,
     function (err, newUser) {
       passport.authenticate('local')(req, res, function() {
-        res.send('signed up!!!');
+        res.redirect('/');
       });
     }
   );
@@ -90,7 +88,7 @@ app.post('/signup', function (req, res) {
 // log in user
 app.post('/login', passport.authenticate('local'), function (req, res) {
   console.log(req.user);
-  res.send('logged in!!!');
+  res.redirect('/');
 });
 
 // log out user

@@ -108,47 +108,39 @@
 
 
         <!-- one event -->
-        <div class="row album" data-album-id={{_id}}>
+        <div class="row event" data-user_id={{user_id}} data-event-id={{_id}}>
 
           <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
               <div class="panel-body">
 
 
-                <!-- begin album internal row -->
+                <!-- begin event internal row -->
 
                 <div class='row'>
 
                   <div class="col-md-9 col-xs-12">
-                    <ul class="list-group">
-                      <li class="list-group-item">
-                        <h4 class='inline-header'>Date:</h4>
-                        <span class='album-name'>{{date}}</span>
-                      </li>
-
-                      <li class="list-group-item">
-                        <h4 class='inline-header'>Host Name:</h4>
-                        <span class='artist-name'>{{_host}}</span>
-                      </li>
-
-                      <li class="list-group-item">
-                        <h4 class='inline-header'>Status:</h4>
-                        <span class='album-releaseDate'>{{status}}</span>
-                      </li>
-                    </ul>
+                    <h4>Date:</h4>
+                    <span id='date'>{{date}}</span>
+                    <h4>Host Name:</h4>
+                    <span id='_host'>{{_host.name}}</span>
+                    <h4 >Status:</h4>
+                    <span id='status'>{{status}}</span>
+                    <h4 >Min Level:</h4>
+                    <span id='minimum_level'>{{minimum_level}}</span>
+                    <button class='btn btn-primary edit-event' id="edit-event">Edit Event</button>
                   </div>
-
                 </div>
-                <!-- end of album internal row -->
+                <!-- end of event internal row -->
 
                 <div class='panel-footer'>
-                  <button class='btn btn-primary add-song'>Select</button>
+
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- end one album -->
+        <!-- end one event -->
 
 
       </script>
