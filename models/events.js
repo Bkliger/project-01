@@ -1,12 +1,13 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
-var User = require('./users.js');
+var User = require('./user.js');
 
 var EventSchema = new Schema({
-    _host: { type: Number, ref: 'User'},
+    _host: { type: String, ref: 'User'},
     date: Date,
 minimum_level: Number,
-       participants: [{requested_instrument: String, player: { type: Number, ref: 'User'}}]
+status: String,
+       participants: [{requested_instrument: String, player: { type: String, ref: 'User'}}]
 });
 
 
