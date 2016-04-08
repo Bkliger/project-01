@@ -2,7 +2,6 @@ $(document).ready(function() {
     console.log("app.js is loaded");
     $form = $("#user_profile_form");
     data = $form.serializeArray();
-    console.log(data);
 
     //handlebars
     var source = $("#event_template").html();
@@ -11,7 +10,7 @@ $(document).ready(function() {
     //load event list right away
 
     function getAllEvents() {
-        console.log('executing get all');
+
         $.ajax({
             method: "GET",
             url: '/api/events',
@@ -19,35 +18,20 @@ $(document).ready(function() {
             error: getAllError
         });
     }
-    //Save user profile data
+    //Update user profile data
     $form.on("submit", function(e) {
-        data = $form.serializeArray();
-        console.log("1",data);
-
-        console.log("2","form button clicked");
-        e.preventDefault();
-        $.ajax({
-            method: "POST",
+      e.preventDefault();
+      $.get('/api/me', function getUserData(user) {
+          data = $form.serializeArray();
+          $.ajax({
+            method: "PUT",
             data: data,
-            url: "/api/users",
-            success: addUserSuccess,
-            error: addUserError
+            url: "/api/users/"+user._id,
+            success: updateUserSuccess,
+            error: updateUserError
         });
+      });
     });
-
-    //Save user profile data
-    // $form.on("submit", function(e) {
-    //   id = $form.attr("data-user_id");
-    //   e.preventDefault();
-    //   $.ajax({
-    //     method: "PUT",
-    //     data: data,
-    //     url: "/api/users/:"+id,
-    //     success: addUserSuccess,
-    //     error: addUserError
-    //   });
-    // });
-    //pop up modal to add event
 
     // when the edit button for an album is clicked
 
@@ -85,14 +69,12 @@ $(document).ready(function() {
 });
 
 function renderEvent(event) {
-    console.log('renderhere');
 
     var eventHtml = event_template(event);
     $("#events").prepend(eventHtml);
 }
 
 function handleGetAllEvents(json) {
-    console.log("got all events", json);
     json.forEach(function(event) {
         renderEvent(event);
     });
@@ -144,4 +126,11 @@ function handlePostEventSuccess(json) {
 
 function newPostEventError(err) {
     console.log("add Event error");
+}
+function  updateUserSuccess(json) {
+    console.log("updated user", json);
+}
+
+function updateUserError(err) {
+    console.log("update user error");
 }

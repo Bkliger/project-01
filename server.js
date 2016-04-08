@@ -68,9 +68,15 @@ app.get('/login', function (req, res) {
 
 //API routes
 app.post('/api/users', controllers.usersController.create);
-// app.put('/api/users/:_id', controllers.usersController.update);
+app.put('/api/users/:_id', controllers.usersController.update);
 app.post('/api/events/:_host', controllers.eventsController.create);
 app.get('/api/events/', controllers.eventsController.getAll);
+
+app.get('/api/me', function (req, res) {
+  console.log(req.user);
+  res.json(req.user);
+});
+
 
 //Authentication Routes
 // sign up new user, then log them in

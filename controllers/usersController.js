@@ -18,6 +18,25 @@ function create(req,res) {
 
 }
 
+function update(req,res) {
+  console.log("1 this is req.body", req.body);
+    console.log("1 this is user id", req.params._id);
+
+  // db.User.update({"_id": ObjectId(req.params._id)},{
+db.User.update({_id: req.params._id},
+  {
+    name: req.body.name,
+    street_address: req.body.street_address,
+    city: req.body.city,
+    state: req.body.state,
+    zip: req.body.zip,
+    level: req.body.level
+  },
+    {upsert: false});
+
+  if (err) { return console.log("user update error: " + err); }
+  res.json(updatedUser);
+}
 
 
 
@@ -25,5 +44,6 @@ function create(req,res) {
 // export public methods here
 module.exports = {
   create: create,
+  update: update,
 
 };
