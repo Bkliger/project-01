@@ -35,7 +35,7 @@
 
 
   <div>
-    <form class="form-inline" id="user_profile_form" data-user_id="">
+    <form class="form-inline" id="user_profile_form">
       <div class="form-group">
         <label for="name">Full Name</label>
         <input type="text" class="form-control" name="name" required>
@@ -96,7 +96,7 @@
 
 
         <!-- one event -->
-        <div class="row event" data-user_id={{user_id}} data-event-id={{_id}}>
+        <div class="row event" data-event-id={{_id}}>
 
           <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
@@ -121,9 +121,6 @@
                 </div>
                 <!-- end of event internal row -->
 
-                <div class='panel-footer'>
-
-                </div>
               </div>
             </div>
           </div>

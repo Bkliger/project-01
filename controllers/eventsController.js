@@ -29,10 +29,34 @@ function getAll(req,res) {
 }
 
 
+function update(req, res) {
+    console.log("1 this is req.body", req.body);
+    console.log("2 this is user id", req.params._id);
+
+    // db.User.update({"_id": ObjectId(req.params._id)},{
+    db.User.update({
+            _id: req.params._id
+        }, {
+            _host: req.params.something here,
+            date: req.body.date,
+            minimum_level: req.body.minimum_level,
+        }, {
+            upsert: false
+        }, function(err, updateEvent) {
+            if (err) {
+                return console.log("event update error: " + err);
+            }
+            res.json(updateEvent);
+        });
+
+
+    }
+
 
 // export public methods here
 module.exports = {
   create: create,
   getAll: getAll,
+  update: update,
 
 };

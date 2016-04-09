@@ -39,10 +39,24 @@ $(document).ready(function() {
 
     // when the edit button for an event is clicked
 
-    $('#edit-event').on('click', function(e){
-      var user_id = $(this).closest('.event').attr(data-user-id);
+    $('#events').on('click', '.edit-event', function(event) {
 
+      $.get('/api/me', function getUserData(user) {
+        console.log("1", user)
+        var $eventRow = $(event.target).closest('.event');
+console.log("2 here")
+        var event_id = $eventRow.attr("data-event-id");
+        console.log("got event id", event_id);
+        $.ajax({
+            method: "GET",
+            url: '/api/events/' + event_id,
+            success: handleEditEvent,
+            error: editEventError
+        });
+      });
     });
+
+
 
 
 
@@ -143,4 +157,16 @@ function  loginSuccess(json) {
 
 function loginError(err) {
     alert("User/Password not found");
+}
+
+function   handleEditEvent(json) {
+  console.log("handle event", json);
+  $form = $("#newEventForm");
+  $("#date").val(json.date);
+  $("#minimum_level").val(json.minimum_level);
+  $('#eventModal').modal();
+}
+
+function editEventError(err) {
+    console.log("open edit event error");
 }
