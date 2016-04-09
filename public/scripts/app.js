@@ -1,6 +1,24 @@
 $(document).ready(function() {
     console.log("app.js is loaded");
     $form = $("#user_profile_form");
+    //handlebars
+    var source = $("#event_template").html();
+    event_template = Handlebars.compile(source);
+    getAllEvents();
+    //load event list right away
+
+    function getAllEvents() {
+
+        $.ajax({
+            method: "GET",
+            url: '/api/events',
+            success: handleGetAllEvents,
+            error: getAllError
+        });
+    }
+
+
+
     //Update user profile data
     $form.on("submit", function(e) {
       e.preventDefault();
@@ -39,7 +57,6 @@ $(document).ready(function() {
         e.preventDefault();
         $.get('/api/me', function getUserData(user){
             var url = "/api/events/" + user._id;
-            console.log(url)
             $.ajax({
                 method: 'POST',
                 data: $("#newEventForm").serializeArray(),
