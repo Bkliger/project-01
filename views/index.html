@@ -35,15 +35,14 @@
 
 
   <div id="user">
-    <script id='user-template' type='text/x-handlebars-template'>
       <form class="form-inline" id="user_profile_form">
         <div class="form-group">
           <label for="name">Full Name</label>
-          <input type="text" class="form-control" name="name" value={{name}} required>
+          <input type="text" class="form-control" id="profile_name" name="name" value="" required>
         </div>
         <div class="form-group">
           <label for="instrument">Instrument</label>
-          <select name="instrument" required = "true" value={{instrument}}>
+          <select name="instrument" id="profile_instrument" required = "true" value="">
             <option value="1st Violin">1st Violin</option>
             <option value="2nd Violin">2nd Violin</option>
             <option value="Viola">Viola</option>
@@ -52,7 +51,7 @@
             <option value="Clarinet">Clarinet</option>
           </select>
           <label for="level">Level</label>
-          <select name="level" value={{level}}>
+          <select name="level" value="" id="profile_level" >
             <option value="10">Professional</option>
             <option value="9">A+</option>
             <option value="8">A</option>
@@ -65,13 +64,13 @@
             <option value="1">C-</option>
           </select>
           <label for="street_address">Street Address</label>
-          <input type="text" class="form-control" name="street_address" value={{street_address}} required>
+          <input type="text" class="form-control" id="profile_street_address" name="street_address" value="" required>
           <label for="city">City</label>
-          <input type="text" class="form-control" name="city" value={{city}} required>
+          <input type="text" class="form-control" name="city" id="profile_city" value="" required>
           <label for="state">State</label>
-          <input type="text" class="form-control" name="state" value={{state}} required>
+          <input type="text" class="form-control" name="state" id="profile_state" value="" required>
           <label for="zip_code">Zip Code</label>
-          <input type="text" class="form-control" name="zip_code" value={{zip}} required>
+          <input type="text" class="form-control" name="zip" id="profile_zip" value="" required>
         </div>
         <div class="col-md-4">
           <button id="saveButton" name="saveButton" class="btn btn-primary">Update User Data</button>
@@ -83,7 +82,7 @@
       <div class="col-md-4">
         <button id="searchButton" name="searchButton" class="btn btn-primary" >Search for an Event</button>
       </div>
-  </script>
+  <!-- </script> -->
   </div>
 
   <!-- event list -->
@@ -163,9 +162,9 @@
             <!-- Text input-->
 
             <div class="form-group">
-              <label class="col-md-4 control-label" for="edit_minimum_level">Minimum Level</label>
+              <label class="col-md-4 control-label" for="edit_min_level">Minimum Level</label>
               <div class="col-md-4">
-                <select name="edit_minimum_level" id ="edit_level" class="form-control input-md">
+                <select name="edit_min_level" id ="edit_min_level" value="" class="form-control input-md">
                   <option value="10">Professional</option>
                   <option value="9">A+</option>
                   <option value="8">A</option>

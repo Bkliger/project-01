@@ -7,7 +7,6 @@ $(document).ready(function() {
 
 
     $.get('/api/me', function getUserData(user) {
-      console.log(user._id);
       $.ajax({
           method: "GET",
           url: '/api/users/' + user._id,
@@ -19,15 +18,7 @@ $(document).ready(function() {
     getAllEvents();
     //load event list right away
 
-    function getAllEvents() {
 
-        $.ajax({
-            method: "GET",
-            url: '/api/events',
-            success: handleGetAllEvents,
-            error: getAllError
-        });
-    }
 
 
 
@@ -93,18 +84,25 @@ $(document).ready(function() {
                 success: handlePostEventSuccess,
                 error: newPostEventError,
             });
-            $('#eventModal').modal('hide');
-            $.ajax({
-                method: "GET",
-                url: '/api/events',
-                success: handleGetAllEvents,
-                error: getAllError
-            });
+
         });
     });
 
     // End of Document Ready
 });
+
+
+
+function getAllEvents() {
+  $.get('/api/me', function getUserData(user) {
+    $.ajax({
+        method: "GET",
+        url: '/api/events/' + user._id,
+        success: handleGetAllEvents,
+        error: getAllError
+    });
+  });
+}
 
 function renderEvent(event) {
 
@@ -138,7 +136,13 @@ function addUserError(err) {
 }
 
 function handlePostEventSuccess(json) {
-    console.log("added Event", json);
+  $('#eventModal').modal('hide');
+  $.ajax({
+      method: "GET",
+      url: '/api/events',
+      success: handleGetAllEvents,
+      error: getAllError
+  });
 }
 
 function newPostEventError(err) {
@@ -171,22 +175,15 @@ function editEventError(err) {
 
 
 function handleGetTheUser(user) {
-  console.log(user)
-  var user_source = $("#user_template").html();
-  user_template = Handlebars.compile(user_source);
-      var userHtml = user_template(user);
-      $("#user").empty();
-      $("#user").append(userHTML);
+  $("#profile_name").val(user[0].name);
+  $("#profile_instrument").val(user[0].instrument);
+  $("#profile_level").val(user[0].level);
+  $("#profile_street_address").val(user[0].street_address);
+  $("#profile_city").val(user[0].city);
+  $("#profile_state").val(user[0].state);
+  $("#profile_zip").val(user[0].zip);
+
   }
-
-  // $("#user_profile_form").name.val(json.name);
-  // $("#user_profile_form").street_address.val(json.street_address);
-  // $("#user_profile_form").city.val(json.city);
-  // $("#user_profile_form").state.val(json.state);
-  // $("#user_profile_form").zip.val(json.zip);
-  // $("#user_profile_form").level.val(json.level);
-  // $("#user_profile_form").instrument.val(json.instrument);
-
 function getTheUserError(err) {
     console.log("user not found error");
 }

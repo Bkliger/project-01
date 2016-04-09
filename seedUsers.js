@@ -16,6 +16,7 @@ var Users =[
         state: 'VA',
         zip: '45333',
         level: '6',
+        instrument: "1st Violin"
       },
   {
         name: 'John Adams',

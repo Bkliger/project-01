@@ -1,13 +1,12 @@
 var db = require("../models");
 
 function create(req,res) {
-  //get user id
   db.User.findById(req.params._host, function(err,user){
-    console.log(user);
+
     var newEvent = new db.Event({
        _host: user,
-       date: req.body.date,
-       minimum_level: req.body.minimum_level,
+       date: req.body.edit_date,
+       minimum_level: req.body.edit_min_level,
     });
     newEvent.save(function(err,newEvent){
       if (err) { return console.log("event create error: " + err); }
@@ -19,9 +18,8 @@ function create(req,res) {
 }
 
 function index(req,res) {
-
-//_host._id: req.user._id
-  db.Event.find ()
+  console.log(req.params._id)
+  db.Event.find ({_host: req.params._id })
   .populate('_host')
   .exec(function(err, events){
    if (err) { return console.log("events error: " + err); }
@@ -32,7 +30,6 @@ function index(req,res) {
 
 
 function show(req, res) {
-  console.log("2 this is event id", req.params._event_id);
       db.Event.findById(req.params._event_id, function(err,event){
         if (err) { return console.log("event not found: " + err); }
         res.json(event);
