@@ -34,54 +34,56 @@
 
 
 
-  <div>
-    <form class="form-inline" id="user_profile_form">
-      <div class="form-group">
-        <label for="name">Full Name</label>
-        <input type="text" class="form-control" name="name" required>
-      </div>
-      <div class="form-group">
-        <label for="instrument">Instrument</label>
-        <select name="instrument" required = "true">
-          <option value="1st Violin">1st Violin</option>
-          <option value="2nd Violin">2nd Violin</option>
-          <option value="Viola">Viola</option>
-          <option value="Cello">Cello</option>
-          <option value="Piano">Piano</option>
-          <option value="Clarinet">Clarinet</option>
-        </select>
-        <label for="level">Level</label>
-        <select name="level">
-          <option value="10">Professional</option>
-          <option value="9">A+</option>
-          <option value="8">A</option>
-          <option value="7">A-</option>
-          <option value="6">B+</option>
-          <option value="5">B</option>
-          <option value="4">B-</option>
-          <option value="3">C+</option>
-          <option value="2">C</option>
-          <option value="1">C-</option>
-        </select>
-        <label for="street_address">Street Address</label>
-        <input type="text" class="form-control" name="street_address" required>
-        <label for="city">City</label>
-        <input type="text" class="form-control" name="city" required>
-        <label for="state">State</label>
-        <input type="text" class="form-control" name="state" required>
-        <label for="zip_code">Zip Code</label>
-        <input type="text" class="form-control" name="zip_code" required>
+  <div id="user">
+    <script id='user-template' type='text/x-handlebars-template'>
+      <form class="form-inline" id="user_profile_form">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" class="form-control" name="name" value={{name}} required>
+        </div>
+        <div class="form-group">
+          <label for="instrument">Instrument</label>
+          <select name="instrument" required = "true" value={{instrument}}>
+            <option value="1st Violin">1st Violin</option>
+            <option value="2nd Violin">2nd Violin</option>
+            <option value="Viola">Viola</option>
+            <option value="Cello">Cello</option>
+            <option value="Piano">Piano</option>
+            <option value="Clarinet">Clarinet</option>
+          </select>
+          <label for="level">Level</label>
+          <select name="level" value={{level}}>
+            <option value="10">Professional</option>
+            <option value="9">A+</option>
+            <option value="8">A</option>
+            <option value="7">A-</option>
+            <option value="6">B+</option>
+            <option value="5">B</option>
+            <option value="4">B-</option>
+            <option value="3">C+</option>
+            <option value="2">C</option>
+            <option value="1">C-</option>
+          </select>
+          <label for="street_address">Street Address</label>
+          <input type="text" class="form-control" name="street_address" value={{street_address}} required>
+          <label for="city">City</label>
+          <input type="text" class="form-control" name="city" value={{city}} required>
+          <label for="state">State</label>
+          <input type="text" class="form-control" name="state" value={{state}} required>
+          <label for="zip_code">Zip Code</label>
+          <input type="text" class="form-control" name="zip_code" value={{zip}} required>
+        </div>
+        <div class="col-md-4">
+          <button id="saveButton" name="saveButton" class="btn btn-primary">Update User Data</button>
+        </div>
+      </form>
+      <div class="col-md-4">
+        <button id="newEventButton" name="saveButton" class="btn btn-primary" >Create New Event</button>
       </div>
       <div class="col-md-4">
-        <button id="saveButton" name="saveButton" class="btn btn-primary">Update User Data</button>
+        <button id="searchButton" name="searchButton" class="btn btn-primary" >Search for an Event</button>
       </div>
-    </form>
-    <div class="col-md-4">
-      <button id="newEventButton" name="saveButton" class="btn btn-primary" >Create New Event</button>
-    </div>
-    <div class="col-md-4">
-      <button id="searchButton" name="searchButton" class="btn btn-primary" >Search for an Event</button>
-    </div>
+  </script>
   </div>
 
   <!-- event list -->

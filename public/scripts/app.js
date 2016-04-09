@@ -4,6 +4,18 @@ $(document).ready(function() {
     //handlebars
     var source = $("#event_template").html();
     event_template = Handlebars.compile(source);
+
+
+    $.get('/api/me', function getUserData(user) {
+      console.log(user._id);
+      $.ajax({
+          method: "GET",
+          url: '/api/users/' + user._id,
+          success: handleGetTheUser,
+          error: getTheUserError
+      });
+    });
+
     getAllEvents();
     //load event list right away
 
@@ -21,18 +33,18 @@ $(document).ready(function() {
 
     //Update user profile data
     $form.on("submit", function(e) {
-      e.preventDefault();
-      $.get('/api/me', function getUserData(user) {
-          data = $form.serializeArray();
-          $.ajax({
-            method: "PUT",
-            data: data,
-            url: "/api/users/"+user._id,
-            success: updateUserSuccess,
-            error: updateUserError
-          });
+        e.preventDefault();
+        $.get('/api/me', function getUserData(user) {
+            data = $form.serializeArray();
+            $.ajax({
+                method: "PUT",
+                data: data,
+                url: "/api/users/" + user._id,
+                success: updateUserSuccess,
+                error: updateUserError
+            });
         });
-      });
+    });
 
 
 
@@ -41,27 +53,23 @@ $(document).ready(function() {
 
     $('#events').on('click', '.edit-event', function(event) {
 
-      $.get('/api/me', function getUserData(user) {
-        console.log("1", user)
-        var $eventRow = $(event.target).closest('.event');
-        var event_id = $eventRow.attr("data-event-id");
-        var $eventForm = $("#newEventForm");
-        $eventForm.data("user_id", user.id);
-
-    //  /  $.data.val()
-        console.log('/api/events/' + event_id);
-        $.ajax({
-            method: "GET",
-            url: '/api/events/' + event_id,
-            success: handleEditEvent,
-            error: editEventError
+        $.get('/api/me', function getUserData(user) {
+            var $eventRow = $(event.target).closest('.event');
+            var event_id = $eventRow.attr("data-event-id");
+            var $eventForm = $("#newEventForm");
+            $eventForm.data("user_id", user.id);
+            $.ajax({
+                method: "GET",
+                url: '/api/events/' + event_id,
+                success: handleEditEvent,
+                error: editEventError
+            });
         });
-      });
     });
 
     $('#searchButton').on('click', function(e) {
         // window.open ("/views/search.html");
-         window.location.href = "http//:localhost:3000/search"
+        window.location.href = "http//:localhost:3000/search";
 
 
     });
@@ -70,13 +78,13 @@ $(document).ready(function() {
 
 
     $('#newEventButton').on('click', function(e) {
-      $('#eventModal').modal();
+        $('#eventModal').modal();
     });
 
     //Create new event
     $('#saveEvent').on('click', function(e) {
         e.preventDefault();
-        $.get('/api/me', function getUserData(user){
+        $.get('/api/me', function getUserData(user) {
             var url = "/api/events/" + user._id;
             $.ajax({
                 method: 'POST',
@@ -86,8 +94,14 @@ $(document).ready(function() {
                 error: newPostEventError,
             });
             $('#eventModal').modal('hide');
+            $.ajax({
+                method: "GET",
+                url: '/api/events',
+                success: handleGetAllEvents,
+                error: getAllError
+            });
         });
-      });
+    });
 
     // End of Document Ready
 });
@@ -105,9 +119,9 @@ function handleGetAllEvents(json) {
 }
 
 function handleEventEditClick(e) {
-  var $eventRow = $(this).closest('.event');
-  var eventId = $eventRow.attr("data-event-id");
-  console.log('edit event', eventId);
+    var $eventRow = $(this).closest('.event');
+    var eventId = $eventRow.attr("data-event-id");
+    console.log('edit event', eventId);
 }
 
 
@@ -130,27 +144,49 @@ function handlePostEventSuccess(json) {
 function newPostEventError(err) {
     console.log("add Event error");
 }
-function  updateUserSuccess(json) {
-}
+
+function updateUserSuccess(json) {}
 
 function updateUserError(err) {
     console.log("update user error");
 }
 
-function  loginSuccess(json) {
-  window.open ("./index.html");
+function loginSuccess(json) {
+    window.open("./index.html");
 }
 
 function loginError(err) {
     alert("User/Password not found");
 }
 
-function   handleEditEvent(json) {
-  $('#eventModal').modal();
-  $("#edit_date").val(json.date);
-  $("#edit_level").val(json.minimum_level);
+function handleEditEvent(json) {
+    $('#eventModal').modal();
+    $("#edit_date").val(json.date);
+    $("#edit_level").val(json.minimum_level);
 }
 
 function editEventError(err) {
     console.log("open edit event error");
+}
+
+
+function handleGetTheUser(user) {
+  console.log(user)
+  var user_source = $("#user_template").html();
+  user_template = Handlebars.compile(user_source);
+      var userHtml = user_template(user);
+      $("#user").empty();
+      $("#user").append(userHTML);
+  }
+
+  // $("#user_profile_form").name.val(json.name);
+  // $("#user_profile_form").street_address.val(json.street_address);
+  // $("#user_profile_form").city.val(json.city);
+  // $("#user_profile_form").state.val(json.state);
+  // $("#user_profile_form").zip.val(json.zip);
+  // $("#user_profile_form").level.val(json.level);
+  // $("#user_profile_form").instrument.val(json.instrument);
+
+function getTheUserError(err) {
+    console.log("user not found error");
 }

@@ -9,7 +9,6 @@ function create(req,res) {
        date: req.body.date,
        minimum_level: req.body.minimum_level,
     });
-    console.log("this is the resulting newEvent",newEvent);
     newEvent.save(function(err,newEvent){
       if (err) { return console.log("event create error: " + err); }
             res.json(newEvent);
@@ -21,12 +20,12 @@ function create(req,res) {
 
 function index(req,res) {
 
-console.log(req.user._id);
-
-  db.Event.find ({_host: req.user._id  })
+//_host._id: req.user._id
+  db.Event.find ()
   .populate('_host')
   .exec(function(err, events){
    if (err) { return console.log("events error: " + err); }
+  //  console.log(events._host._id)
    res.json(events);
  });
 }
@@ -36,7 +35,6 @@ function show(req, res) {
   console.log("2 this is event id", req.params._event_id);
       db.Event.findById(req.params._event_id, function(err,event){
         if (err) { return console.log("event not found: " + err); }
-        console.log(event);
         res.json(event);
       });
   }

@@ -13,6 +13,7 @@ var UserSchema = new Schema({
   state: String,
   zip: String,
   level: Number,
+  instrument: String,
   event: [{type: Schema.Types.ObjectId, ref: 'Event'}]
 });
 

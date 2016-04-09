@@ -27,7 +27,7 @@
 <body>
   <h2>Log In</h2>
   <br>
-  <form id="login_form">
+    <form method="POST" action="/login">
     <div class="form-group">
       <input type="text" name="username" class="form-control" placeholder="Username" autofocus>
     </div>
@@ -35,9 +35,10 @@
       <input type="password" name="password" class="form-control" placeholder="Password">
     </div>
     <div class="form-group">
-      <input type="submit" id="login" class="btn btn-block btn-primary" value="Log In">
+      <input type="submit" class="btn btn-block btn-primary" value="Log In">
     </div>
   </form>
+
 </body>
 
 </html>

@@ -42,12 +42,23 @@ function update(req, res) {
 
     }
 
+    function show(req, res) {
+        console.log("in the controller",req.params._id);
+        db.User.find({_id: req.params._id}, function(err, User) {
+                if (err) {
+                    return console.log("user not found: " + err);
+                }
+                res.json(User);
+            });
 
+
+        }
 
 
     // export public methods here
     module.exports = {
         create: create,
         update: update,
+        show: show,
 
     };
