@@ -62,7 +62,7 @@ app.get('/login', function (req, res) {
 
 app.get('/search', function (req, res){
   res.sendFile(__dirname + '/views/search.html');
-})
+});
 
 
 
@@ -75,6 +75,7 @@ app.post('/api/events/:_host', controllers.eventsController.create);
 app.get('/api/events/:_id', controllers.eventsController.index);
 app.get('/api/events/:_event_id/', controllers.eventsController.show);
 app.get('/api/users/:_id', controllers.usersController.show);
+app.get('/api/events/', controllers.eventsController.search);
 app.get('/api/me', function (req, res) {
   res.json(req.user);
 });

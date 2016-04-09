@@ -18,7 +18,7 @@ function create(req,res) {
 }
 
 function index(req,res) {
-  console.log(req.params._id)
+  console.log(req.params._id);
   db.Event.find ({_host: req.params._id })
   .populate('_host')
   .exec(function(err, events){
@@ -27,6 +27,18 @@ function index(req,res) {
    res.json(events);
  });
 }
+
+function search(req,res) {
+console.log(req.body)
+  db.Event.find ({date: req.body.date})
+  .populate('_host')
+  .exec(function(err, events){
+   if (err) { return console.log("events error: " + err); }
+  //  console.log(events._host._id)
+   res.json(events);
+ });
+}
+
 
 
 function show(req, res) {
@@ -41,5 +53,6 @@ module.exports = {
   create: create,
   index: index,
   show: show,
+  search: search,
 
 };

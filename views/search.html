@@ -35,53 +35,18 @@
 
 
   <div>
-    <form class="form-inline" id="user_profile_form">
+    <form class="form-inline" id="search_form">
       <div class="form-group">
-        <label for="name">Full Name</label>
-        <input type="text" class="form-control" name="name" required>
+        <label for="date">Date</label>
+        <input type="text" class="form-control" name="date" required>
       </div>
-      <div class="form-group">
-        <label for="instrument">Instrument</label>
-        <select name="instrument" required = "true">
-          <option value="1st Violin">1st Violin</option>
-          <option value="2nd Violin">2nd Violin</option>
-          <option value="Viola">Viola</option>
-          <option value="Cello">Cello</option>
-          <option value="Piano">Piano</option>
-          <option value="Clarinet">Clarinet</option>
-        </select>
-        <label for="level">Level</label>
-        <select name="level">
-          <option value="10">Professional</option>
-          <option value="9">A+</option>
-          <option value="8">A</option>
-          <option value="7">A-</option>
-          <option value="6">B+</option>
-          <option value="5">B</option>
-          <option value="4">B-</option>
-          <option value="3">C+</option>
-          <option value="2">C</option>
-          <option value="1">C-</option>
-        </select>
-        <label for="street_address">Street Address</label>
-        <input type="text" class="form-control" name="street_address" required>
         <label for="city">City</label>
-        <input type="text" class="form-control" name="city" required>
-        <label for="state">State</label>
-        <input type="text" class="form-control" name="state" required>
-        <label for="zip_code">Zip Code</label>
-        <input type="text" class="form-control" name="zip_code" required>
+        <input type="text" class="form-control" name="city">
       </div>
       <div class="col-md-4">
-        <button id="saveButton" name="saveButton" class="btn btn-primary">Update User Data</button>
+        <button id="searchButton" name="searchButton" class="btn btn-primary">Search Events</button>
       </div>
     </form>
-    <div class="col-md-4">
-      <button id="newEventButton" name="saveButton" class="btn btn-primary" >Create New Event</button>
-    </div>
-    <div class="col-md-4">
-      <button id="searchButton" name="searchButton" class="btn btn-primary" >Search for an Event</button>
-    </div>
   </div>
 
   <!-- event list -->
@@ -89,7 +54,7 @@
   <section class="container">
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
-        <h2>Your Events</h2>
+        <h2>Matching Events</h2>
       </div>
     </div>
     <!-- events - this is where handelbars attachs -->
@@ -111,15 +76,12 @@
                 <div class='row'>
 
                   <div class="col-md-9 col-xs-12">
-                    <h4>Date:</h4>
-                    <span id='date'>{{date}}</span>
                     <h4>Host Name:</h4>
                     <span id='_host'>{{_host.name}}</span>
                     <h4 >Status:</h4>
                     <span id='status'>{{status}}</span>
                     <h4 >Min Level:</h4>
                     <span id='minimum_level'>{{minimum_level}}</span>
-                    <button class='btn btn-primary edit-event' id="edit-event">Edit Event</button>
                   </div>
                 </div>
                 <!-- end of event internal row -->

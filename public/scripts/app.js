@@ -150,7 +150,7 @@ function newPostEventError(err) {
 }
 
 function updateUserSuccess(json) {
-  console.log("update success")
+  console.log("update success");
   getAllEvents();
 
 }
