@@ -60,7 +60,9 @@ app.get('/login', function (req, res) {
   res.sendFile(__dirname + '/views/login.html');
 });
 
-
+app.get('/search', function (req, res){
+  res.sendFile(__dirname + '/views/search.html');
+})
 
 
 

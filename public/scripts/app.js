@@ -149,7 +149,11 @@ function newPostEventError(err) {
     console.log("add Event error");
 }
 
-function updateUserSuccess(json) {}
+function updateUserSuccess(json) {
+  console.log("update success")
+  getAllEvents();
+
+}
 
 function updateUserError(err) {
     console.log("update user error");
