@@ -19,8 +19,11 @@ function create(req,res) {
 
 }
 
-function getAll(req,res) {
-  db.Event.find ()
+function index(req,res) {
+
+console.log(req.user._id);
+
+  db.Event.find ({_host: req.user._id  })
   .populate('_host')
   .exec(function(err, events){
    if (err) { return console.log("events error: " + err); }
@@ -29,34 +32,19 @@ function getAll(req,res) {
 }
 
 
-function update(req, res) {
-    console.log("1 this is req.body", req.body);
-    console.log("2 this is user id", req.params._id);
-
-    // db.User.update({"_id": ObjectId(req.params._id)},{
-    db.User.update({
-            _id: req.params._id
-        }, {
-            _host: req.params.something here,
-            date: req.body.date,
-            minimum_level: req.body.minimum_level,
-        }, {
-            upsert: false
-        }, function(err, updateEvent) {
-            if (err) {
-                return console.log("event update error: " + err);
-            }
-            res.json(updateEvent);
-        });
-
-
-    }
-
+function show(req, res) {
+  console.log("2 this is event id", req.params._event_id);
+      db.Event.findById(req.params._event_id, function(err,event){
+        if (err) { return console.log("event not found: " + err); }
+        console.log(event);
+        res.json(event);
+      });
+  }
 
 // export public methods here
 module.exports = {
   create: create,
-  getAll: getAll,
-  update: update,
+  index: index,
+  show: show,
 
 };

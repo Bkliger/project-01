@@ -21,10 +21,6 @@ function create(req, res) {
 }
 
 function update(req, res) {
-    console.log("1 this is req.body", req.body);
-    console.log("2 this is user id", req.params._id);
-
-    // db.User.update({"_id": ObjectId(req.params._id)},{
     db.User.update({
             _id: req.params._id
         }, {

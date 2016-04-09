@@ -60,17 +60,17 @@ $(document).ready(function() {
     });
 
     $('#searchButton').on('click', function(e) {
-        // window.open ("/views/search.html");
-         window.location.href = "http//:localhost:3000/search"
 
 
+        $('#eventModal').modal();
     });
 
 
 
 
     $('#newEventButton').on('click', function(e) {
-      $('#eventModal').modal();
+        window.open ("./index.html");
+
     });
 
     //Create new event
