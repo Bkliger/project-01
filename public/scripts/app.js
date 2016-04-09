@@ -1,23 +1,6 @@
 $(document).ready(function() {
     console.log("app.js is loaded");
     $form = $("#user_profile_form");
-    data = $form.serializeArray();
-
-    //handlebars
-    var source = $("#event_template").html();
-    event_template = Handlebars.compile(source);
-    getAllEvents();
-    //load event list right away
-
-    function getAllEvents() {
-
-        $.ajax({
-            method: "GET",
-            url: '/api/events',
-            success: handleGetAllEvents,
-            error: getAllError
-        });
-    }
     //Update user profile data
     $form.on("submit", function(e) {
       e.preventDefault();
@@ -29,11 +12,14 @@ $(document).ready(function() {
             url: "/api/users/"+user._id,
             success: updateUserSuccess,
             error: updateUserError
+          });
         });
       });
-    });
 
-    // when the edit button for an album is clicked
+
+
+
+    // when the edit button for an event is clicked
 
     $('#edit-event').on('click', function(e){
       var user_id = $(this).closest('.event').attr(data-user-id);
@@ -43,27 +29,27 @@ $(document).ready(function() {
 
 
     $('#newEventButton').on('click', function(e) {
-        id = $form.attr("data-user_id");
-        console.log(id);
+
+
         $('#eventModal').modal();
     });
 
     //Create new event
     $('#saveEvent').on('click', function(e) {
         e.preventDefault();
-
-        var id = $form.attr("data-user_id");
-        var url = "/api/events/:" + id;
-        $.ajax({
-            method: 'POST',
-            data: $("#newEventForm").serializeArray(),
-            url: url,
-            success: handlePostEventSuccess,
-            error: newPostEventError,
+        $.get('/api/me', function getUserData(user){
+            var url = "/api/events/" + user._id;
+            console.log(url)
+            $.ajax({
+                method: 'POST',
+                data: $("#newEventForm").serializeArray(),
+                url: url,
+                success: handlePostEventSuccess,
+                error: newPostEventError,
+            });
+            $('#eventModal').modal('hide');
         });
-        $('#eventModal').modal('hide');
-    });
-
+      });
 
     // End of Document Ready
 });
@@ -128,9 +114,16 @@ function newPostEventError(err) {
     console.log("add Event error");
 }
 function  updateUserSuccess(json) {
-    console.log("updated user", json);
 }
 
 function updateUserError(err) {
     console.log("update user error");
+}
+
+function  loginSuccess(json) {
+  window.open ("./index.html");
+}
+
+function loginError(err) {
+    alert("User/Password not found");
 }
