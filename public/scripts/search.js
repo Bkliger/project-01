@@ -9,10 +9,9 @@ $(document).ready(function() {
     $form.on("submit", function(e) {
         e.preventDefault();
         data = $form.serializeArray();
-console.log(data)
         $.ajax({
             method: "GET",
-            data: $form.serializeArray(),
+            // data: $form.serializeArray(),
             url: "/api/events/",
             success: findEventsSuccess,
             error: findEventsError
@@ -29,17 +28,19 @@ console.log(data)
 });
 
 function renderEvent(event) {
-
     var eventHtml = event_template(event);
     $("#events").prepend(eventHtml);
 }
 
-
+// json.date === $("#query_date").val()&&
+// json._host.city === $("#query_city").val()
 function findEventsSuccess(json) {
-    console.log(json)
-    json.forEach(function(event) {
-        renderEvent(event);
-    });
+  json.forEach(function(json) {
+    console.log("json date:", json.date,"query date:", $("#query_date").val()+"T08:00:00.000Z", "json city:", json._host.city,"query city:", $("#query_city").val());
+    if (json._host.city === $("#query_city").val()) {
+      renderEvent(json);
+    }
+  });
 }
 
 function findEventsError(err) {

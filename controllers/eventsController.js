@@ -17,7 +17,6 @@ function create(req, res) {
     });
 }
 
-//problems here
 function index(req, res) {
     db.Event.find()
         .populate('_host')
@@ -29,9 +28,8 @@ function index(req, res) {
             res.json(events);
         });
 }
-//problems here
+//problems here probably eliminate
 function search(req, res) {
-    console.log(req.body);
     db.Event.find({
             date: req.body.date
         })

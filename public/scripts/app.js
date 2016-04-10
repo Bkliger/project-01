@@ -96,9 +96,10 @@ function getAllEvents() {
 //creates each event row separately
 function handleGetAllEvents(json) {
   $.get('/api/me', function getUserData(user) {
-    console.log(json._host._id)
+    console.log(user)
     json.forEach(function(event) {
-      if (json._host._id === user._id) {
+      console.log(event)
+      if (event._host._id === user._id) {
           renderEvent(event);
       }
     });

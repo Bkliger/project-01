@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Chamber Match</title>
+  <title>Chamber Match Search</title>
 
   <!-- STYLESHEETS -->
   <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
@@ -38,10 +38,10 @@
     <form class="form-inline" id="search_form">
       <div class="form-group">
         <label for="date">Date</label>
-        <input type="text" class="form-control" name="date" required>
+        <input type="text" id="query_date" class="form-control" name="date" required>
       </div>
         <label for="city">City</label>
-        <input type="text" class="form-control" name="city">
+        <input type="text" id="query_city" class="form-control" name="city">
       </div>
       <div class="col-md-4">
         <button id="searchButton" name="searchButton" class="btn btn-primary">Search Events</button>
