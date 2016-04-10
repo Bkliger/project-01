@@ -6,6 +6,7 @@ $(document).ready(function() {
     event_template = Handlebars.compile(source);
 
 
+//initial load of index.html - get the user data and load profile page
     $.get('/api/me', function getUserData(user) {
       $.ajax({
           method: "GET",
@@ -14,9 +15,9 @@ $(document).ready(function() {
           error: getTheUserError
       });
     });
-
+//load event list for that user right away
     getAllEvents();
-    //load event list right away
+
 
 
 
@@ -38,41 +39,12 @@ $(document).ready(function() {
     });
 
 
-
-
-    // when the edit button for an event is clicked
-
-    $('#events').on('click', '.edit-event', function(event) {
-
-        $.get('/api/me', function getUserData(user) {
-            var $eventRow = $(event.target).closest('.event');
-            var event_id = $eventRow.attr("data-event-id");
-            var $eventForm = $("#newEventForm");
-            $eventForm.data("user_id", user.id);
-            $.ajax({
-                method: "GET",
-                url: '/api/events/' + event_id,
-                success: handleEditEvent,
-                error: editEventError
-            });
-        });
-    });
-
-    $('#searchButton').on('click', function(e) {
-        // window.open ("/views/search.html");
-        window.location.href = "http//:localhost:3000/search";
-
-
-    });
-
-
-
-
+//click the new event button on the profile page
     $('#newEventButton').on('click', function(e) {
         $('#eventModal').modal();
     });
 
-    //Create new event
+    //Create new event in the modal dialog box
     $('#saveEvent').on('click', function(e) {
         e.preventDefault();
         $.get('/api/me', function getUserData(user) {
@@ -84,15 +56,34 @@ $(document).ready(function() {
                 success: handlePostEventSuccess,
                 error: newPostEventError,
             });
-
         });
     });
+
+
+
+    // Select an event to edit and display modal dialog box.
+    $('#events').on('click', '.edit-event', function(event) {
+        $.get('/api/me', function getUserData(user) {
+            var $eventRow = $(event.target).closest('.event');
+            var event_id = $eventRow.attr("data-event-id");
+            var $eventForm = $("#newEventForm");
+            $eventForm.data("user_id", user.id);
+            //use the show function in eventsController to get one event
+            $.ajax({
+                method: "GET",
+                url: '/api/events/' + event_id,
+                success: handleEditEvent,
+                error: editEventError
+            });
+        });
+    });
+
 
     // End of Document Ready
 });
 
 
-
+//retrieve all events for a user
 function getAllEvents() {
   $.get('/api/me', function getUserData(user) {
     $.ajax({
@@ -104,35 +95,21 @@ function getAllEvents() {
   });
 }
 
-function renderEvent(event) {
-
-    var eventHtml = event_template(event);
-    $("#events").prepend(eventHtml);
-}
-
+//creates each event row separately
 function handleGetAllEvents(json) {
     json.forEach(function(event) {
         renderEvent(event);
     });
 }
 
-function handleEventEditClick(e) {
-    var $eventRow = $(this).closest('.event');
-    var eventId = $eventRow.attr("data-event-id");
-    console.log('edit event', eventId);
+//use handlebars to render the events
+function renderEvent(event) {
+    var eventHtml = event_template(event);
+    $("#events").prepend(eventHtml);
 }
-
 
 function getAllError(err) {
     console.log("get all events error");
-}
-
-function addUserSuccess(json) {
-    console.log("added User", json);
-}
-
-function addUserError(err) {
-    console.log("add User error");
 }
 
 function handlePostEventSuccess(json) {
@@ -150,17 +127,12 @@ function newPostEventError(err) {
 }
 
 function updateUserSuccess(json) {
-  console.log("update success");
+  alert("User Profile Updated");
   getAllEvents();
-
 }
 
 function updateUserError(err) {
     console.log("update user error");
-}
-
-function loginSuccess(json) {
-    window.open("./index.html");
 }
 
 function loginError(err) {
@@ -176,7 +148,6 @@ function handleEditEvent(json) {
 function editEventError(err) {
     console.log("open edit event error");
 }
-
 
 function handleGetTheUser(user) {
   $("#profile_name").val(user[0].name);

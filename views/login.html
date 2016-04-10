@@ -25,20 +25,23 @@
 </head>
 
 <body>
-  <h2>Log In</h2>
-  <br>
-    <form method="POST" action="/login">
-    <div class="form-group">
-      <input type="text" name="username" class="form-control" placeholder="Username" autofocus>
+  <div class="container main"
+    <div class="col-md-6 col-md-offset-1">
+      <h2 class="white">Log In</h2>
+      <br>
+        <form method="POST" action="/login">
+        <div class="form-group">
+          <input type="text" name="username" class="form-control" placeholder="Username" autofocus>
+        </div>
+        <div class="form-group">
+          <input type="password" name="password" class="form-control" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <input type="submit" class="btn btn-block btn-primary" value="Log In">
+        </div>
+      </form>
     </div>
-    <div class="form-group">
-      <input type="password" name="password" class="form-control" placeholder="Password">
-    </div>
-    <div class="form-group">
-      <input type="submit" class="btn btn-block btn-primary" value="Log In">
-    </div>
-  </form>
-
+  </div>
 </body>
 
 </html>

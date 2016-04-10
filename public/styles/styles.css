@@ -4,5 +4,13 @@
 
 .label, label.inline {
     display: inline-block;
-    width: 100px;
+    width: 50px;
+}
+
+.main {
+  background-image: url("../images/ID-10020343.png");
+}
+
+.white {
+  color: white;
 }

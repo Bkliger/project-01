@@ -1,23 +1,7 @@
 var db = require("../models");
 
-function create(req, res) {
-    var newUser = new db.User({
-        name: req.body.name,
-        street_address: req.body.street_address,
-        city: req.body.city,
-        state: req.body.state,
-        zip: req.body.zip,
-        level: req.body.level,
-    });
-    newUser.save(function(err, newUser) {
-        if (err) {
-            return console.log("user create error: " + err);
-        }
-        res.json(newUser);
-    });
 
-}
-
+//user is created by passport - it is updated with complete profile info here
 function update(req, res) {
     db.User.update({
             _id: req.params._id
@@ -38,7 +22,7 @@ function update(req, res) {
             res.json(updateUser);
         });
 
-
+//get the complete user object for insertion into the event
     }
 
     function show(req, res) {

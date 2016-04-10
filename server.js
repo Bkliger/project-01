@@ -52,14 +52,14 @@ app.get('/', function homepage (req, res) {
 app.get('/signup', function (req, res) {
   res.sendFile(__dirname + '/views/signup.html');
 });
-  // res.render('signup'); // you can also use res.sendFile
-// res.status(200).send("pong!");
+
 
 // show login view
 app.get('/login', function (req, res) {
   res.sendFile(__dirname + '/views/login.html');
 });
 
+// Show search page
 app.get('/search', function (req, res){
   res.sendFile(__dirname + '/views/search.html');
 });
