@@ -36,13 +36,11 @@
 
   <div id="user">
       <form class="form-inline" id="user_profile_form">
-        <div class="form-group">
+        <div class="form-group col-md-offset-1">
           <label for="name">Full Name</label>
           <input type="text" class="form-control" id="profile_name" name="name" value="" required>
-        </div>
-        <div class="form-group">
           <label for="instrument">Instrument</label>
-          <select name="instrument" id="profile_instrument" required = "true" value="">
+          <select name="instrument" id="profile_instrument" class="black" required = "true" value="">
             <option value="1st Violin">1st Violin</option>
             <option value="2nd Violin">2nd Violin</option>
             <option value="Viola">Viola</option>
@@ -51,7 +49,7 @@
             <option value="Clarinet">Clarinet</option>
           </select>
           <label for="level">Level</label>
-          <select name="level" value="" id="profile_level" >
+          <select name="level" value="" class="black"  id="profile_level" >
             <option value="10">Professional</option>
             <option value="9">A+</option>
             <option value="8">A</option>
@@ -63,12 +61,17 @@
             <option value="2">C</option>
             <option value="1">C-</option>
           </select>
+        </div>
+        <div class="form-group col-sm-offset-1">
+
           <label for="street_address">Street Address</label>
           <input type="text" class="form-control" id="profile_street_address" name="street_address" value="" required>
           <label for="city">City</label>
           <input type="text" class="form-control" name="city" id="profile_city" value="" required>
-          <label for="state">State</label>
-          <input type="text" class="form-control" name="state" id="profile_state" value="" required>
+          <div class="form-group-sm">
+            <label for="state">State</label>
+            <input type="text" class="form-control" name="state" id="profile_state" value="" required>
+          </div>
           <label for="zip_code">Zip Code</label>
           <input type="text" class="form-control" name="zip" id="profile_zip" value="" required>
         </div>
@@ -82,7 +85,6 @@
       <div class="col-md-4">
         <a href="./search" class="btn btn-primary">Search for an Event</a>
       </div>
-  <!-- </script> -->
   </div>
 
   <!-- event list -->
@@ -93,11 +95,9 @@
         <h2>Your Events</h2>
       </div>
     </div>
-    <!-- events - this is where handelbars attachs -->
+    <!-- events - this is where handelbars attaches -->
     <div id='events'>
       <script id="event_template" type="text/x-handlebars-template">
-
-
 
         <!-- one event -->
         <div class="row event" data-event-id={{_id}}>
@@ -148,7 +148,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Create Event</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body black">
         <form  id="newEventForm" data-user_id="">
           <fieldset class='form-horizontal'>
             <!-- Text input-->
@@ -178,6 +178,23 @@
                 </select>
               </div>
             </div>
+            <div class="col-md-4">
+              <h4>1st Violin:</h4>
+              <span id='violin1'>"some value"</span>
+              <h4>2nd Violin:</h4>
+              <span id='violin2'>"some value"</span>
+              <h4 >Viola:</h4>
+              <span id='viola'>"some value"</span>
+              <h4 >Cello:</h4>
+              <span id='cello'>"some value"</span>
+            </div>
+
+
+            <!-- <script type="text/javascript">
+           $(function () {
+               $('#edit_date').datetimepicker();
+           });
+       </script> -->
           </fieldset>
         </form>
       </div>

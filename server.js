@@ -72,7 +72,7 @@ app.get('/search', function (req, res){
 // app.post('/api/users', controllers.usersController.create);
 app.put('/api/users/:_id', controllers.usersController.update);
 app.post('/api/events/:_host', controllers.eventsController.create);
-app.get('/api/events/:_id', controllers.eventsController.index);
+app.get('/api/events/', controllers.eventsController.index);
 app.get('/api/events/:_event_id/', controllers.eventsController.show);
 app.get('/api/users/:_id', controllers.usersController.show);
 app.get('/api/events/', controllers.eventsController.search);

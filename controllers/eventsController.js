@@ -19,21 +19,19 @@ function create(req, res) {
 
 //problems here
 function index(req, res) {
-    console.log(req.params._id);
-    db.Event.find({
-            _host: req.params._id
-        })
+    db.Event.find()
         .populate('_host')
         .exec(function(err, events) {
             if (err) {
                 return console.log("events error: " + err);
             }
+            console.log(events)
             res.json(events);
         });
 }
 //problems here
 function search(req, res) {
-    console.log(req.body)
+    console.log(req.body);
     db.Event.find({
             date: req.body.date
         })

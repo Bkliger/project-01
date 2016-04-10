@@ -85,21 +85,24 @@ $(document).ready(function() {
 
 //retrieve all events for a user
 function getAllEvents() {
-  $.get('/api/me', function getUserData(user) {
-    $.ajax({
-        method: "GET",
-        url: '/api/events/' + user._id,
-        success: handleGetAllEvents,
-        error: getAllError
-    });
+  $.ajax({
+      method: "GET",
+      url: '/api/events/',
+      success: handleGetAllEvents,
+      error: getAllError
   });
 }
 
 //creates each event row separately
 function handleGetAllEvents(json) {
+  $.get('/api/me', function getUserData(user) {
+    console.log(json._host._id)
     json.forEach(function(event) {
-        renderEvent(event);
+      if (json._host._id === user._id) {
+          renderEvent(event);
+      }
     });
+  });
 }
 
 //use handlebars to render the events
