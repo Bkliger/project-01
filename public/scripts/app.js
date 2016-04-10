@@ -4,7 +4,7 @@ $(document).ready(function() {
     //handlebars
     var source = $("#event_template").html();
     event_template = Handlebars.compile(source);
-
+    $("#date-picker").datepicker({});
 
 //initial load of index.html - get the user data and load profile page
     $.get('/api/me', function getUserData(user) {
@@ -17,11 +17,6 @@ $(document).ready(function() {
     });
 //load event list for that user right away
     getAllEvents();
-
-
-
-
-
 
     //Update user profile data
     $form.on("submit", function(e) {
@@ -66,8 +61,11 @@ $(document).ready(function() {
         $.get('/api/me', function getUserData(user) {
             var $eventRow = $(event.target).closest('.event');
             var event_id = $eventRow.attr("data-event-id");
-            var $eventForm = $("#newEventForm");
-            $eventForm.data("user_id", user.id);
+
+
+//these two lines of code may not be necessary
+            // var $eventForm = $("#newEventForm");
+            // $eventForm.data("user_id", user.id);
             //use the show function in eventsController to get one event
             $.ajax({
                 method: "GET",
@@ -145,7 +143,7 @@ function loginError(err) {
 
 function handleEditEvent(json) {
     $('#eventModal').modal();
-    $("#edit_date").val(json.date);
+    $("#date-picker").val(json.date);
     $("#edit_level").val(json.minimum_level);
 }
 

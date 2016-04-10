@@ -9,12 +9,15 @@
 
   <!-- STYLESHEETS -->
   <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css">
   <link rel="stylesheet" href="styles/styles.css">
 
   <!-- VENDOR SCRIPTS -->
   <script src="vendor/jQuery/dist/jquery.min.js"></script>
   <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.js"></script>
   <script src="vendor/handlebars/handlebars.min.js"></script>
+
 
   <!-- APPLICATION SCRIPTS -->
   <script src="scripts/search.js"></script>
@@ -38,7 +41,7 @@
     <form class="form-inline" id="search_form">
       <div class="form-group">
         <label for="date">Date</label>
-        <input type="text" id="query_date" class="form-control" name="date" required>
+        <input type="text" id="date-picker" class="form-control" name="date-picker" required>
       </div>
         <label for="city">City</label>
         <input type="text" id="query_city" class="form-control" name="city">
@@ -83,6 +86,7 @@
                     <span id='status'>{{status}}</span>
                     <h4 >Min Level:</h4>
                     <span id='minimum_level'>{{minimum_level}}</span>
+                    <button class='btn btn-primary edit-event' id="view-event">View Event</button>
                   </div>
                 </div>
                 <!-- end of event internal row -->
@@ -108,38 +112,36 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Create Event</h4>
+        <h4 class="modal-title">View Event</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body black">
         <form  id="newEventForm" data-user_id="">
           <fieldset class='form-horizontal'>
             <!-- Text input-->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="edit_date">Event Date</label>
-              <div class="col-md-4">
-                <input id="edit_date" name="edit_date" type="text" placeholder="" class="form-control input-md" required="">
-              </div>
-            </div>
 
             <!-- Text input-->
 
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="edit_minimum_level">Minimum Level</label>
-              <div class="col-md-4">
-                <select name="edit_minimum_level" id ="edit_level" class="form-control input-md">
-                  <option value="10">Professional</option>
-                  <option value="9">A+</option>
-                  <option value="8">A</option>
-                  <option value="7">A-</option>
-                  <option value="6">B+</option>
-                  <option value="5">B</option>
-                  <option value="4">B-</option>
-                  <option value="3">C+</option>
-                  <option value="2">C</option>
-                  <option value="1">C-</option>
-                </select>
-              </div>
+            <div class="col-md-4">
+              <h4>Date:</h4>
+              <span id='view_date'>""</span>
+              <h4>Minimum Level:</h4>
+              <span id='view_level'value=""</span>
+              <h4>1st Violin:</h4>
+              <span id='violin1'>"some value"</span>
+              <h4>2nd Violin:</h4>
+              <span id='violin2'>"some value"</span>
+              <h4 >Viola:</h4>
+              <span id='viola'>"some value"</span>
+              <h4 >Cello:</h4>
+              <span id='cello'>"some value"</span>
             </div>
+
+
+            <!-- <script type="text/javascript">
+           $(function () {
+               $('#edit_date').datetimepicker();
+           });
+       </script> -->
           </fieldset>
         </form>
       </div>
