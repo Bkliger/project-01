@@ -82,3 +82,6 @@ Users should only see those events that they have signed up for or that they are
 Database
 There are two models - users and events. A user can host and participate in many events
 and an event can have many participants (users). The application uses referencing in Mongo to accomplish this.
+
+Disapointments
+* I would have like to search on Date as well but could not get the returned json date to match my entered value.

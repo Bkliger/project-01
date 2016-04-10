@@ -40,8 +40,8 @@
   <div>
     <form class="form-inline" id="search_form">
       <div class="form-group">
-        <label for="date">Date</label>
-        <input type="text" id="date-picker" class="form-control" name="date-picker" required>
+        <label for="search_date">Date</label>
+        <input type="text" id="search_date" class="form-control" name="search_date">
       </div>
         <label for="city">City</label>
         <input type="text" id="query_city" class="form-control" name="city">
@@ -108,40 +108,57 @@
 
   <!-- begin eventModal: this is not visible until you call .modal() on it -->
 <div class="modal fade" tabindex="-1" role="dialog" id="eventModal">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-admin">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">View Event</h4>
       </div>
       <div class="modal-body black">
+        <div class="col-md-2">
+          <h4>Date:</h4>
+          <span id='view_date'>""</span>
+          <h4>Minimum Level:</h4>
+          <span id='view_level'>""</span>
+        </div>
         <form  id="newEventForm" data-user_id="">
           <fieldset class='form-horizontal'>
-            <!-- Text input-->
-
-            <!-- Text input-->
-
-            <div class="col-md-4">
-              <h4>Date:</h4>
-              <span id='view_date'>""</span>
-              <h4>Minimum Level:</h4>
-              <span id='view_level'value=""</span>
-              <h4>1st Violin:</h4>
-              <span id='violin1'>"some value"</span>
-              <h4>2nd Violin:</h4>
-              <span id='violin2'>"some value"</span>
-              <h4 >Viola:</h4>
-              <span id='viola'>"some value"</span>
-              <h4 >Cello:</h4>
-              <span id='cello'>"some value"</span>
+            <div class="form-group">
+              <label class="col-md-2 control-label" for="violin1">1st Violin</label>
+              <div class="col-md-4">
+                <input id="violin1" name="violin1" type="text" placeholder="" class="form-control">
+              </div>
+              <div class="col-md-4">
+                <button id="violin1Button" name="violin1Button" class="btn btn-primary" >Select</button>
+              </div>
             </div>
-
-
-            <!-- <script type="text/javascript">
-           $(function () {
-               $('#edit_date').datetimepicker();
-           });
-       </script> -->
+            <div class="form-group">
+              <label class="col-md-2 control-label" for="violin2">2nd Violin</label>
+              <div class="col-md-4">
+                <input id="violin2" name="violin2" type="text" placeholder="" class="form-control">
+              </div>
+              <div class="col-md-4">
+                <button id="violin2Button" name="violin2Button" class="btn btn-primary" >Select</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-2 control-label" for="viola">Viola</label>
+              <div class="col-md-4">
+                <input id="viola" name="viola" type="text" placeholder="" class="form-control">
+              </div>
+              <div class="col-md-4">
+                <button id="violaButton" name="violaButton" class="btn btn-primary" >Select</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-2 control-label" for="cello">Cello</label>
+              <div class="col-md-4">
+                <input id="cello" name="cello" type="text" placeholder="" class="form-control">
+              </div>
+              <div class="col-md-4">
+                <button id="celloButton" name="celloButton" class="btn btn-primary" >Select</button>
+              </div>
+            </div>
           </fieldset>
         </form>
       </div>

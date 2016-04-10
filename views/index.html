@@ -148,7 +148,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Create Event</h4>
+        <h4 id="edit-event-title" class="modal-title black">Create Event</h4>
       </div>
       <div class="modal-body black">
         <form  id="newEventForm" data-user_id="">
@@ -157,7 +157,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="edit_date">Event Date</label>
               <div class="col-md-4">
-                <input id="date-picker" name="date-picker" type="text" placeholder="" class="form-control" required="">
+                <input id="edit_date" name="edit_date" type="text" placeholder="" class="form-control black" required="">
               </div>
             </div>
 
@@ -182,13 +182,13 @@
             </div>
             <div class="col-md-4">
               <h4>1st Violin:</h4>
-              <span id='violin1'>"some value"</span>
+              <span id='violin1'></span>
               <h4>2nd Violin:</h4>
-              <span id='violin2'>"some value"</span>
+              <span id='violin2'></span>
               <h4 >Viola:</h4>
-              <span id='viola'>"some value"</span>
+              <span id='viola'></span>
               <h4 >Cello:</h4>
-              <span id='cello'>"some value"</span>
+              <span id='cello'></span>
             </div>
 
 

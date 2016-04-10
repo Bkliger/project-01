@@ -33,6 +33,8 @@ $(document).ready(function() {
         });
     });
 
+    //participant selection buttons
+
 
 
 
@@ -47,12 +49,11 @@ function renderEvent(event) {
     var eventHtml = event_template(event);
     $("#events").prepend(eventHtml);
 }
-
-// ISODate(json.date) === $("#date-picker").val()&&
-// json._host.city === $("#query_city").val()
+//I would have like to search on Date as well but could not get the returned json date to match my entered value.
+//convertDate(json.date).toString() === $("#date-picker").toString()&&
 function findEventsSuccess(json) {
   json.forEach(function(json) {
-    console.log("json date:", json.date,"query date:", $("#date-picker").val(), "json city:", json._host.city,"query city:", $("#query_city").val());
+  //  console.log("json date:", convertDate(json.date).toString(),"query date:", $("#date-picker").val().toString(), "json city:", json._host.city,"query city:", $("#query_city").val());
     if (json._host.city === $("#query_city").val()) {
       renderEvent(json);
     }
@@ -66,7 +67,7 @@ function findEventsError(err) {
 
 function handleEditEvent(json) {
     $('#eventModal').modal();
-    $("#view_date").text(json.date);
+    $("#view_date").text(convertDate(json.date));
     $("#view_level").text(json.minimum_level);
     // $("#violin1").val(json.participant[0].requested_instrument);
     // $("#violin2").val(json.participant[1].requested_instrument);
@@ -77,4 +78,13 @@ function handleEditEvent(json) {
 
 function editEventError(err) {
     console.log("open edit event error");
+}
+
+function convertDate(ugly) {
+   var month = ugly[5] + ugly[6];
+   var day =   ugly[8] + ugly[9];
+   var year =  ugly[0]+ugly[1]+ugly[2]+ugly[3];
+
+   var refinedDate = month+'/'+day+'/'+year;
+   return refinedDate;
 }

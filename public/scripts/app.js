@@ -94,9 +94,7 @@ function getAllEvents() {
 //creates each event row separately
 function handleGetAllEvents(json) {
   $.get('/api/me', function getUserData(user) {
-    console.log(user)
     json.forEach(function(event) {
-      console.log(event)
       if (event._host._id === user._id) {
           renderEvent(event);
       }
@@ -142,9 +140,11 @@ function loginError(err) {
 }
 
 function handleEditEvent(json) {
+  console.log("Edit event", json)
     $('#eventModal').modal();
-    $("#date-picker").val(json.date);
-    $("#edit_level").val(json.minimum_level);
+    $("#edit-date").val(convertDate(json.date));
+    $("#edit_min_level").val(json.minimum_level);
+    $("#edit-event-title").text("Edit Event");
 }
 
 function editEventError(err) {
@@ -163,4 +163,13 @@ function handleGetTheUser(user) {
   }
 function getTheUserError(err) {
     console.log("user not found error");
+}
+
+function convertDate(ugly) {
+   var month = ugly[5] + ugly[6];
+   var day =   ugly[8] + ugly[9];
+   var year =  ugly[0]+ugly[1]+ugly[2]+ugly[3];
+
+   var refinedDate = month+'/'+day+'/'+year;
+   return refinedDate;
 }

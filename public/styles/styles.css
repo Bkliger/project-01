@@ -9,6 +9,11 @@
     width: 50px;
 }
 
+.modal-admin {
+    /* new custom width */
+    width: 1000px;
+    /* must be half of the width, minus scrollbar on the left (30px) */
+}
 .black {
   color: black;
 }
@@ -20,12 +25,6 @@
   color: white;
 }
 
-
-fieldset.elist, input[type="text"], textarea, select, option, fieldset.elist ul, fieldset.elist > legend, fieldset.elist input[type="text"], fieldset.elist > legend:after {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
 
 input[type="text"] {
   padding: 0 10px;
@@ -49,26 +48,6 @@ input[type="text"], fieldset.elist, select, fieldset.elist > legend {
   font-size: 14px;
 }
 
-input[type="text"]:hover, textarea:hover, select:hover, fieldset.elist:hover > legend {
-  background-color: #ddddff;
-}
-
-select {
-  padding: 4px 20px;
-}
-
-option {
-  height: 30px;
-  padding: 5px 4px;
-}
-
-option:not(:checked), textarea:focus {
-  background-color: #ffcccc;
-}
-
-fieldset.elist > legend:after, fieldset.elist label {
-  height: 28px;
-}
 
 input[type="text"], fieldset.elist {
   width: 316px;
@@ -80,115 +59,4 @@ input[type="text"]:focus {
 
 input[type="text"]:focus, textarea:focus, select:focus, fieldset.elist > legend {
   border: 2px #ccaaaa solid;
-}
-
-fieldset {
-  border: 2px #af3333 solid;
-  border-radius: 10px;
-}
-
-/* Editable [pseudo]select (i.e. fieldsets with [class=elist]) */
-
-fieldset.elist {
-  display: inline-block;
-  position: relative;
-  vertical-align: middle;
-  overflow: visible;
-  padding: 0;
-  margin: 0;
-  border: none;
-}
-
-fieldset.elist ul {
-  position: absolute;
-  width: 100%;
-  max-height: 320px;
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
-  background-color: transparent;
-}
-
-fieldset.elist:hover ul {
-  background-color: #ffffff;
-  border: 2px #af3333 solid;
-  left: 2px;
-  overflow: auto;
-}
-
-fieldset.elist ul > li {
-  list-style-type: none;
-  background-color: transparent;
-}
-
-fieldset.elist label {
-  display: none;
-  width: 100%;
-}
-
-fieldset.elist input[type="text"] {
-  width: 100%;
-  height: 30px;
-  line-height: 30px;
-  border: none;
-  background-color: transparent;
-  border-radius: 0;
-}
-
-fieldset.elist > legend {
-  display: block;
-  margin: 0;
-  padding: 0 0 0 5px;
-  position: absolute;
-  width: 100%;
-  cursor: default;
-  background-color: #ccffcc;
-  line-height: 30px;
-  font-style: italic;
-}
-
-fieldset.elist:hover > legend {
-  position: relative;
-  overflow: hidden;
-}
-
-fieldset.elist > legend:after {
-  width: 20px;
-  content: "\2335";
-  float: right;
-  text-align: center;
-  border-left: 2px #cccccc solid;
-  font-style: normal;
-  cursor: default;
-}
-
-fieldset.elist:hover > legend:after {
-  background-color: #99ff99;
-}
-
-fieldset.elist ul input[type="radio"] {
-  display: none;
-}
-
-fieldset.elist input[type="radio"]:checked ~ label {
-  display: block;
-  width: 292px;
-  background-color: #ffffff;
-}
-
-fieldset.elist:hover input[type="radio"]:checked ~ label {
-  width: 100%;
-}
-
-fieldset.elist:hover label {
-  display: block;
-  height: 100%;
-}
-
-fieldset.elist label:hover {
-  background-color: #3333ff !important;
-}
-
-fieldset.elist:hover input[type="radio"]:checked ~ label {
-  background-color: #aaaaaa;
 }
