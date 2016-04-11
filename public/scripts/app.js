@@ -42,18 +42,29 @@ $(document).ready(function() {
     //Create new event in the modal dialog box
     $('#saveEvent').on('click', function(e) {
         e.preventDefault();
-        $.get('/api/me', function getUserData(user) {
-            var url = "/api/events/" + user._id;
-            $.ajax({
-                method: 'POST',
-                data: $("#newEventForm").serializeArray(),
-                url: url,
-                success: handlePostEventSuccess,
-                error: newPostEventError,
-            });
-        });
+        event_id = $("#eventModal").data("event_id").event_id;
+        if (event_id === undefined){
+          $.get('/api/me', function getUserData(user) {
+              var url = "/api/events/" + user._id;
+              $.ajax({
+                  method: 'POST',
+                  data: $("#newEventForm").serializeArray(),
+                  url: url,
+                  success: handlePostEventSuccess,
+                  error: newPostEventError,
+              });
+          });
+        } else {
+          console.log('/api/events/' + event_id)
+          $.ajax({
+              method: "PUT",
+              url: '/api/events/' + event_id,
+              data: $("#newEventForm").serializeArray(),
+              success: handleUpdateEvent,
+              error: updateEventError
+          });
+        }
     });
-
 
 
     // Select an event to edit and display modal dialog box.
@@ -61,20 +72,19 @@ $(document).ready(function() {
         $.get('/api/me', function getUserData(user) {
             var $eventRow = $(event.target).closest('.event');
             var event_id = $eventRow.attr("data-event-id");
-
-
-//these two lines of code may not be necessary
-            // var $eventForm = $("#newEventForm");
-            // $eventForm.data("user_id", user.id);
+//store the event_id for latter use
+            $("#eventModal").data("event_id",{event_id: event_id});
             //use the show function in eventsController to get one event
             $.ajax({
                 method: "GET",
                 url: '/api/events/' + event_id,
+                data: $("#newEventForm").serializeArray(),
                 success: handleEditEvent,
                 error: editEventError
             });
         });
     });
+
 
 
     // End of Document Ready
@@ -140,9 +150,9 @@ function loginError(err) {
 }
 
 function handleEditEvent(json) {
-  console.log("Edit event", json)
+  console.log("Edit event", json);
     $('#eventModal').modal();
-    $("#edit-date").val(convertDate(json.date));
+    $("#edit_date").val(convertDate(json.date));
     $("#edit_min_level").val(json.minimum_level);
     $("#edit-event-title").text("Edit Event");
 }
@@ -163,6 +173,21 @@ function handleGetTheUser(user) {
   }
 function getTheUserError(err) {
     console.log("user not found error");
+}
+
+function handleUpdateEvent(json) {
+console.log(json);
+  $('#eventModal').modal('hide');
+  $.ajax({
+      method: "GET",
+      url: '/api/events',
+      success: handleGetAllEvents,
+      error: getAllError
+  });
+}
+
+function updateEventError(err) {
+    console.log("could not update event error");
 }
 
 function convertDate(ugly) {

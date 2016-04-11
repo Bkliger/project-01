@@ -37,7 +37,6 @@ $(document).ready(function() {
     $("#violin1Button").on('click', function(e){
       e.preventDefault();
       $.get('/api/me', function getUserData(user) {
-        console.log(user)
         $.ajax({
             method: "GET",
             url: '/api/users/' + user._id,
@@ -79,13 +78,14 @@ function findEventsError(err) {
 
 
 function handleEditEvent(json) {
+console.log(json);
     $('#eventModal').modal();
     $("#view_date").text(convertDate(json.date));
     $("#view_level").text(json.minimum_level);
-    // $("#violin1").val(json.participant[0].requested_instrument);
-    // $("#violin2").val(json.participant[1].requested_instrument);
-    // $("#viola").val(json.participant[2].requested_instrument);
-    // $("#cello").val(json.participant[3].requested_instrument);
+    $("#violin1").text(json.participants[0].player);
+    $("#violin2").text(json.participants[1].player);
+    $("#viola").text(json.participants[2].player);
+    $("#cello").text(json.participants[3].player);
 
 }
 
@@ -103,8 +103,9 @@ function convertDate(ugly) {
 }
 
 function handleViolin1User(json) {
-console.log(json)
-    $("#violin1").text(json[0].name);
+console.log(json);
+$('#eventModal').modal('hide');
+
 }
 
 function getTheUserError(err) {

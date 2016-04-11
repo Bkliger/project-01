@@ -7,7 +7,15 @@ function create(req, res) {
             _host: user,
             date: req.body.edit_date,
             minimum_level: req.body.edit_min_level,
-            participants: [{requested_instrument: "1st Violin"},{requested_instrument: "2nd Violin"},{requested_instrument: "Viola"},{requested_instrument: "Cello"}],
+            participants: [{
+                requested_instrument: "1st Violin"
+            }, {
+                requested_instrument: "2nd Violin"
+            }, {
+                requested_instrument: "Viola"
+            }, {
+                requested_instrument: "Cello"
+            }],
         });
         newEvent.save(function(err, newEvent) {
             if (err) {
@@ -28,20 +36,24 @@ function index(req, res) {
             res.json(events);
         });
 }
-//problems here probably eliminate
-function search(req, res) {
-    db.Event.find({
-            date: req.body.date
-        })
-        .populate('_host')
-        .exec(function(err, events) {
-            if (err) {
-                return console.log("events error: " + err);
-            }
-            //  console.log(events._host._id)
-            res.json(events);
-        });
-}
+
+function update(req, res) {
+console.log(req.body, req.params._event_id)
+    db.Event.update({
+        _id: req.params._event_id
+    }, {
+        date: req.body.edit_date,
+        minimum_level: req.body.edit_min_level,
+    }, {
+        upsert: false
+    }, function(err, updateEvent) {
+          if (err) {
+              return console.log("user update error: " + err);
+          }
+        console.log("update",updateEvent)
+        res.json(updateEvent);
+      });
+  }
 
 
 //get one event to edit
@@ -59,6 +71,6 @@ module.exports = {
     create: create,
     index: index,
     show: show,
-    search: search,
+    update: update,
 
 };
