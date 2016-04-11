@@ -3,7 +3,6 @@ var db = require("../models");
 //add new event - must retrieve user information and place it in the _host field by reference.
 function create(req, res) {
     db.User.findById(req.params._host, function(err, user) {
-        console.log(req.body);
         var newEvent = new db.Event({
             _host: user,
             date: req.body.edit_date,
@@ -26,7 +25,6 @@ function index(req, res) {
             if (err) {
                 return console.log("events error: " + err);
             }
-            console.log(events)
             res.json(events);
         });
 }

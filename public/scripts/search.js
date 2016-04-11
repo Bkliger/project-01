@@ -34,6 +34,19 @@ $(document).ready(function() {
     });
 
     //participant selection buttons
+    $("#violin1Button").on('click', function(e){
+      e.preventDefault();
+      $.get('/api/me', function getUserData(user) {
+        console.log(user)
+        $.ajax({
+            method: "GET",
+            url: '/api/users/' + user._id,
+            success: handleViolin1User,
+            error: getTheUserError
+        });
+      });
+
+    });
 
 
 
@@ -87,4 +100,13 @@ function convertDate(ugly) {
 
    var refinedDate = month+'/'+day+'/'+year;
    return refinedDate;
+}
+
+function handleViolin1User(json) {
+console.log(json)
+    $("#violin1").text(json[0].name);
+}
+
+function getTheUserError(err) {
+    console.log("couldn't find the user error");
 }
