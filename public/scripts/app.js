@@ -121,6 +121,7 @@ function handleGetAllEvents(json) {
     $.get('/api/me', function getUserData(user) {
         json.forEach(function(event) {
             if (event._host._id === user._id) {
+              console.log(event)
                 renderEvent(event);
             }
         });

@@ -133,11 +133,7 @@ function update1(req, res) {
         //get one event to edit
         function show(req, res) {
             db.Event.findById(req.params._event_id)
-                .populate('_host')
-                .populate('violin1')
-                .populate('violin2')
-                .populate('viola')
-                .populate('cello')
+                .populate('_host violin1 violin2 viola cello')
                 .exec(function(err, event) {
                     if (err) {
                         return console.log("event not found: " + err);

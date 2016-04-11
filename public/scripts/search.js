@@ -130,10 +130,10 @@ console.log(json);
     $('#eventModal').modal();
     $("#view_date").text(convertDate(json.date));
     $("#view_level").text(translateLevel(json.minimum_level));
-    $("#violin1").text(json.violin1);
-    $("#violin2").text(json.violin2);
-    $("#viola").text(json.viola);
-    $("#cello").text(json.cello);
+    $("#violin1").text(json.violin1.name);
+    $("#violin2").text(json.violin2.name);
+    $("#viola").text(json.viola.name);
+    $("#cello").text(json.cello.name);
 
 }
 
