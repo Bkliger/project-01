@@ -1,7 +1,7 @@
 $(document).ready(function() {
     console.log("search.js is loaded");
     $form = $("#search_form");
-    $("#date-picker").datepicker({});
+    // $("#date-picker").datepicker({});
 
 
     //handlebars
@@ -51,17 +51,56 @@ $(document).ready(function() {
 
     });
 
+    $("#violin2Button").on('click', function(e){
+      e.preventDefault();
+      //store the participant for latter use
+        $("#eventModal").data("participant",{participant: "violin2"});
+      $.get('/api/me', function getUserData(user) {
+        $.ajax({
+            method: "GET",
+            url: '/api/users/' + user._id,
+            success: handleParticipant,
+            error: getTheUserError
+        });
+      });
 
+    });
 
+    $("#violaButton").on('click', function(e){
+      e.preventDefault();
+      //store the participant for latter use
+        $("#eventModal").data("participant",{participant: "viola"});
+      $.get('/api/me', function getUserData(user) {
+        $.ajax({
+            method: "GET",
+            url: '/api/users/' + user._id,
+            success: handleParticipant,
+            error: getTheUserError
+        });
+      });
 
+    });
 
+    $("#celloButton").on('click', function(e){
+      e.preventDefault();
+      //store the participant for latter use
+        $("#eventModal").data("participant",{participant: "cello"});
+      $.get('/api/me', function getUserData(user) {
+        $.ajax({
+            method: "GET",
+            url: '/api/users/' + user._id,
+            success: handleParticipant,
+            error: getTheUserError
+        });
+      });
 
-
+    });
 
 //End of document ready
 });
 
 function renderEvent(event) {
+console.log("rendering", event)
     var eventHtml = event_template(event);
     $("#events").prepend(eventHtml);
 }
@@ -69,10 +108,14 @@ function renderEvent(event) {
 //convertDate(json.date).toString() === $("#date-picker").toString()&&
 function findEventsSuccess(json) {
   $("#events").empty();
-  json.forEach(function(json) {
-  //  console.log("json date:", convertDate(json.date).toString(),"query date:", $("#date-picker").val().toString(), "json city:", json._host.city,"query city:", $("#query_city").val());
-    if (json._host.city === $("#query_city").val()) {
-      renderEvent(json);
+  json.forEach(function(event) {
+    console.log(event)
+    console.log("event date:", convertDate(event.date),"query date:", $("#search_date").val());
+    var dateMatch = convertDate(event.date) === $("#search_date").val();
+    var cityMatch = event._host.city === $("#query_city").val()
+
+  if (dateMatch && cityMatch) {
+      renderEvent(event);
     }
   });
 }
@@ -87,10 +130,10 @@ console.log(json);
     $('#eventModal').modal();
     $("#view_date").text(convertDate(json.date));
     $("#view_level").text(translateLevel(json.minimum_level));
-    $("#violin1").text(json.participants[0].player);
-    $("#violin2").text(json.participants[1].player);
-    $("#viola").text(json.participants[2].player);
-    $("#cello").text(json.participants[3].player);
+    $("#violin1").text(json.violin1);
+    $("#violin2").text(json.violin2);
+    $("#viola").text(json.viola);
+    $("#cello").text(json.cello);
 
 }
 
@@ -98,13 +141,14 @@ function editEventError(err) {
     console.log("open edit event error");
 }
 
-function convertDate(ugly) {
-   var month = ugly[5] + ugly[6];
-   var day =   ugly[8] + ugly[9];
-   var year =  ugly[0]+ugly[1]+ugly[2]+ugly[3];
 
-   var refinedDate = month+'/'+day+'/'+year;
-   return refinedDate;
+function convertDate(ugly) {
+  var month = parseInt(ugly[5] + ugly[6]);
+  var day =   parseInt(ugly[8] + ugly[9]);
+  var year =  ugly[0]+ugly[1]+ugly[2]+ugly[3];
+
+  var refinedDate = month+'/'+day+'/'+year;
+  return refinedDate;
 }
 
 function handleParticipant(user) {

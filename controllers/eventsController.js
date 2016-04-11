@@ -7,15 +7,11 @@ function create(req, res) {
             _host: user,
             date: req.body.edit_date,
             minimum_level: req.body.edit_min_level,
-            participants: [{
-                requested_instrument: "1st Violin"
-            }, {
-                requested_instrument: "2nd Violin"
-            }, {
-                requested_instrument: "Viola"
-            }, {
-                requested_instrument: "Cello"
-            }],
+            violin1: new db.User,
+            violin2: new db.User,
+            viola: new db.User,
+            cello: new db.User,
+            status: "open"
         });
         newEvent.save(function(err, newEvent) {
             if (err) {
@@ -46,59 +42,141 @@ function update(req, res) {
     }, {
         upsert: false
     }, function(err, updateEvent) {
-          if (err) {
-              return console.log("user update error: " + err);
-          }
+        if (err) {
+            return console.log("user update error: " + err);
+        }
         res.json(updateEvent);
-      });
-  }
+    });
+}
 
-  function update1(req, res) {
-    var leftSide = "participants[req.body.index].player"
-    console.log(req.body);
-      db.Event.update({
-          _id: req.params._event_id
-      }, {
-          leftSide: req.body.player,
-      }, {
-          upsert: false
-      }, function(err, updateEvent) {
+function update1(req, res) {
+    if (req.body.index === '0') {
+        db.Event.update({
+            _id: req.params._event_id
+        }, {
+            violin1: req.body.player[0],
+        }, {
+            upsert: false
+        }, function(err, updateEvent) {
             if (err) {
-                return console.log("user update error: " + err);
+                return console.log("event update error: " + err);
             }
-          console.log("update",updateEvent);
-          res.json(updateEvent);
+            console.log("update", updateEvent);
+            res.json(updateEvent);
         });
-    }
-
-//get one event to edit
-function show(req, res) {
-    db.Event.findById(req.params._event_id, function(err, event) {
-        if (err) {
-            return console.log("event not found: " + err);
+    } else if (req.body.index === '1') {
+        console.log("inside if")
+        db.Event.update({
+            _id: req.params._event_id
+        }, {
+            violin2: req.body.player[0],
+        }, {
+            upsert: false
+        }, function(err, updateEvent) {
+            if (err) {
+                return console.log("event update error: " + err);
+            }
+            console.log("update", updateEvent);
+            res.json(updateEvent);
+        });
+      } else if (req.body.index === '2') {
+                console.log("inside if")
+                db.Event.update({
+                    _id: req.params._event_id
+                }, {
+                    viola: req.body.player[0],
+                }, {
+                    upsert: false
+                }, function(err, updateEvent) {
+                    if (err) {
+                        return console.log("event update error: " + err);
+                    }
+                    console.log("update", updateEvent);
+                    res.json(updateEvent);
+                });
+        } else if (req.body.index === '3') {
+                console.log("inside if")
+                db.Event.update({
+                    _id: req.params._event_id
+                }, {
+                    cello: req.body.player[0],
+                }, {
+                    upsert: false
+                }, function(err, updateEvent) {
+                    if (err) {
+                        return console.log("event update error: " + err);
+                    }
+                    console.log("update", updateEvent);
+                    res.json(updateEvent);
+                });
+          }
         }
-        res.json(event);
-    });
-}
 
-//delete event
-function delete1(req, res) {
-    db.Event.remove({_id: req.params._event_id}, function(err, event) {
-        if (err) {
-            return console.log("event not found: " + err);
+        // // from Julianna
+        // function update1(req, res) {
+        // console.log(req.body);
+        //   db.Event.findById(req.params._event_id, function(err, foundEvent) {
+        //     console.log(foundEvent);
+        //     console.log(foundEvent.participants[0]);
+        //     foundEvent.participants[0]['player'] = req.body.player;
+        //
+        //     foundEvent.save(function(err, saved) {
+        //       // console.log('UPDATED', foundEvent.participants[0], 'IN ', saved.participants);
+        //       res.json(saved);
+        //     });
+        //   });
+        // };
+
+
+
+
+        //get one event to edit
+        function show(req, res) {
+            db.Event.findById(req.params._event_id)
+                .populate('_host')
+                .populate('violin1')
+                .populate('violin2')
+                .populate('viola')
+                .populate('cello')
+                .exec(function(err, event) {
+                    if (err) {
+                        return console.log("event not found: " + err);
+                    }
+                    res.json(event);
+                });
         }
-        res.json(event);
-    });
-}
-
-// export public methods here
-module.exports = {
-    create: create,
-    index: index,
-    show: show,
-    update: update,
-    delete: delete1,
-    update1: update1,
 
 
-};
+        function index(req, res) {
+            db.Event.find()
+                .populate('_host')
+                .exec(function(err, events) {
+                    if (err) {
+                        return console.log("events error: " + err);
+                    }
+                    res.json(events);
+                });
+        }
+        //delete event
+        function delete1(req, res) {
+            db.Event.remove({
+                _id: req.params._event_id
+            }, function(err, event) {
+                if (err) {
+                    return console.log("event not found: " + err);
+                }
+                res.json(event);
+            });
+        }
+
+        // export public methods here
+        module.exports = {
+            create: create,
+            index: index,
+            show: show,
+            update: update,
+            delete: delete1,
+            update1: update1,
+
+
+        };

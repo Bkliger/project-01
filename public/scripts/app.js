@@ -4,7 +4,7 @@ $(document).ready(function() {
     //handlebars
     var source = $("#event_template").html();
     event_template = Handlebars.compile(source);
-    $("#date-picker").datepicker({});
+    // $("#date-picker").datepicker({});
 
     //initial load of index.html - get the user data and load profile page
     $.get('/api/me', function getUserData(user) {
@@ -75,7 +75,7 @@ $(document).ready(function() {
         $.get('/api/me', function getUserData(user) {
             var $eventRow = $(event.target).closest('.event');
             var event_id = $eventRow.attr("data-event-id");
-            //store the event_id for latter use
+            //store the event for latter use
             $("#eventModal").data("event_id", {
                 event_id: event_id
             });
