@@ -53,22 +53,23 @@ function update(req, res) {
       });
   }
 
-//   function update1(req, res) {
-// console.log(req.body);
-//       db.Event.update({
-//           _id: req.params._event_id
-//       }, {
-//           // participants[req.body.index].player: req.body.player,
-//       }, {
-//           upsert: false
-//       }, function(err, updateEvent) {
-//             if (err) {
-//                 return console.log("user update error: " + err);
-//             }
-//           console.log("update",updateEvent);
-//           res.json(updateEvent);
-//         });
-//     }
+  function update1(req, res) {
+    var leftSide = "participants[req.body.index].player"
+    console.log(req.body);
+      db.Event.update({
+          _id: req.params._event_id
+      }, {
+          leftSide: req.body.player,
+      }, {
+          upsert: false
+      }, function(err, updateEvent) {
+            if (err) {
+                return console.log("user update error: " + err);
+            }
+          console.log("update",updateEvent);
+          res.json(updateEvent);
+        });
+    }
 
 //get one event to edit
 function show(req, res) {
@@ -97,7 +98,7 @@ module.exports = {
     show: show,
     update: update,
     delete: delete1,
-    // update1: update1,
+    update1: update1,
 
 
 };

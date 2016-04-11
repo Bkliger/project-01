@@ -68,6 +68,7 @@ function renderEvent(event) {
 //I would have like to search on Date as well but could not get the returned json date to match my entered value.
 //convertDate(json.date).toString() === $("#date-picker").toString()&&
 function findEventsSuccess(json) {
+  $("#events").empty();
   json.forEach(function(json) {
   //  console.log("json date:", convertDate(json.date).toString(),"query date:", $("#date-picker").val().toString(), "json city:", json._host.city,"query city:", $("#query_city").val());
     if (json._host.city === $("#query_city").val()) {
@@ -123,22 +124,38 @@ function handleParticipant(user) {
       break;
   }
 
-console.log(user);
-$('#eventModal').modal('hide');
-  event_id = $("#eventModal").data("event_id").event_id;
-  console.log('/api/events/' + event_id)
-$.ajax({
-    method: "PUT",
-    url: '/api/events1/' + event_id,
-    data: data,
-    success: handleUpdateEvent,
-    error: updateEventError
-});
-}
+  console.log('this is the user', user);
+  $('#eventModal').modal('hide');
+    event_id = $("#eventModal").data("event_id").event_id;
+    console.log("this is the route",'/api/events/' + event_id)
+  $.ajax({
+      method: "PUT",
+      url: '/api/events1/' + event_id,
+      data: data,
+      success: handleUpdateEvent,
+      error: updateEventError
+  });
+  }
 
 function getTheUserError(err) {
     console.log("couldn't find the user error");
 }
+
+function updateEventError(err) {
+    console.log("couldn't update the event error");
+}
+
+function handleUpdateEvent() {
+  $.ajax({
+      method: "GET",
+      url: "/api/events/",
+      success: findEventsSuccess,
+      error: findEventsError
+  });
+
+
+}
+
 
 //Translate level
 function translateLevel(level){

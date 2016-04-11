@@ -39,10 +39,11 @@ API routes
 
 app.put('/api/users/:_id', controllers.usersController.update);
 app.post('/api/events/:_host', controllers.eventsController.create);
-app.get('/api/events/:_id', controllers.eventsController.index);
+app.get('/api/events/', controllers.eventsController.index);
 app.get('/api/events/:_event_id/', controllers.eventsController.show);
+app.put('/api/events/:_event_id/', controllers.eventsController.update);
+app.delete('/api/events/:_event_id/', controllers.eventsController.delete);
 app.get('/api/users/:_id', controllers.usersController.show);
-app.get('/api/events/', controllers.eventsController.search);
 --retrieves user information from signup or login--
 app.get('/api/me', function (req, res) {
   res.json(req.user);
@@ -75,6 +76,8 @@ app.get('/logout', function (req, res) {
   res.redirect('/');
 });
 
+User information
+The user begins from either a signup (localhost:3000/signup) or login (localhost:3000/login).
 
 Unique challenges
 Users should only see those events that they have signed up for or that they are hosting. Their event list has to be sensitive to this and they should not be allowed to delete any event for which they are not the host. The application retrieves user information from the server before loading the Profile page and whenever the event list refreshes.
@@ -88,4 +91,6 @@ Disapointments/To Do's
 
 * Display translated levels everywhere. I do this in some places through a function but it would be more complicated to do it through handlebars.
 
-I could not get the event to update with participants - need help here.
+* I could not get the event to update with participants - need help here.
+
+* logout
