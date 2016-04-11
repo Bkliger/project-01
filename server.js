@@ -75,6 +75,8 @@ app.post('/api/events/:_host', controllers.eventsController.create);
 app.get('/api/events/', controllers.eventsController.index);
 app.get('/api/events/:_event_id/', controllers.eventsController.show);
 app.put('/api/events/:_event_id/', controllers.eventsController.update);
+app.delete('/api/events/:_event_id/', controllers.eventsController.delete);
+// app.put('/api/events1/:_event_id/', controllers.eventsController.update1);
 app.get('/api/users/:_id', controllers.usersController.show);
 // app.get('/api/events/', controllers.eventsController.search);
 app.get('/api/me', function (req, res) {

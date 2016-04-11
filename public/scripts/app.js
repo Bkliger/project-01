@@ -6,16 +6,16 @@ $(document).ready(function() {
     event_template = Handlebars.compile(source);
     $("#date-picker").datepicker({});
 
-//initial load of index.html - get the user data and load profile page
+    //initial load of index.html - get the user data and load profile page
     $.get('/api/me', function getUserData(user) {
-      $.ajax({
-          method: "GET",
-          url: '/api/users/' + user._id,
-          success: handleGetTheUser,
-          error: getTheUserError
-      });
+        $.ajax({
+            method: "GET",
+            url: '/api/users/' + user._id,
+            success: handleGetTheUser,
+            error: getTheUserError
+        });
     });
-//load event list for that user right away
+    //load event list for that user right away
     getAllEvents();
 
     //Update user profile data
@@ -34,35 +34,38 @@ $(document).ready(function() {
     });
 
 
-//click the new event button on the profile page
+    //click the new event button on the profile page
     $('#newEventButton').on('click', function(e) {
-        $('#eventModal').modal();
+      $("#eventModal").data("event_id", {
+          event_id: "new"
+      });
+      $('#eventModal').modal();
     });
 
     //Create new event in the modal dialog box
     $('#saveEvent').on('click', function(e) {
         e.preventDefault();
-        event_id = $("#eventModal").data("event_id").event_id;
-        if (event_id === undefined){
-          $.get('/api/me', function getUserData(user) {
-              var url = "/api/events/" + user._id;
-              $.ajax({
-                  method: 'POST',
-                  data: $("#newEventForm").serializeArray(),
-                  url: url,
-                  success: handlePostEventSuccess,
-                  error: newPostEventError,
-              });
-          });
+        console.log($("#eventModal").data("event_id").event_id)
+        if ($("#eventModal").data("event_id").event_id === "new") {
+            $.get('/api/me', function getUserData(user) {
+                var url = "/api/events/" + user._id;
+                $.ajax({
+                    method: 'POST',
+                    data: $("#newEventForm").serializeArray(),
+                    url: url,
+                    success: handlePostEventSuccess,
+                    error: newPostEventError,
+                });
+            });
         } else {
-          console.log('/api/events/' + event_id)
-          $.ajax({
-              method: "PUT",
-              url: '/api/events/' + event_id,
-              data: $("#newEventForm").serializeArray(),
-              success: handleUpdateEvent,
-              error: updateEventError
-          });
+            var event_id = $("#eventModal").data("event_id").event_id
+            $.ajax({
+                method: "PUT",
+                url: '/api/events/' + event_id,
+                data: $("#newEventForm").serializeArray(),
+                success: handleUpdateEvent,
+                error: updateEventError
+            });
         }
     });
 
@@ -72,8 +75,10 @@ $(document).ready(function() {
         $.get('/api/me', function getUserData(user) {
             var $eventRow = $(event.target).closest('.event');
             var event_id = $eventRow.attr("data-event-id");
-//store the event_id for latter use
-            $("#eventModal").data("event_id",{event_id: event_id});
+            //store the event_id for latter use
+            $("#eventModal").data("event_id", {
+                event_id: event_id
+            });
             //use the show function in eventsController to get one event
             $.ajax({
                 method: "GET",
@@ -85,7 +90,16 @@ $(document).ready(function() {
         });
     });
 
-
+    $('#deleteEvent').on('click', function(e) {
+        e.preventDefault();
+        event_id = $("#eventModal").data("event_id").event_id;
+        $.ajax({
+            method: "DELETE",
+            url: '/api/events/' + event_id,
+            success: handleUpdateEvent,
+            error: deleteEventError
+        });
+    });
 
     // End of Document Ready
 });
@@ -93,23 +107,24 @@ $(document).ready(function() {
 
 //retrieve all events for a user
 function getAllEvents() {
-  $.ajax({
-      method: "GET",
-      url: '/api/events/',
-      success: handleGetAllEvents,
-      error: getAllError
-  });
+    $.ajax({
+        method: "GET",
+        url: '/api/events/',
+        success: handleGetAllEvents,
+        error: getAllError
+    });
 }
 
 //creates each event row separately
 function handleGetAllEvents(json) {
-  $.get('/api/me', function getUserData(user) {
-    json.forEach(function(event) {
-      if (event._host._id === user._id) {
-          renderEvent(event);
-      }
+    $("#events").empty();
+    $.get('/api/me', function getUserData(user) {
+        json.forEach(function(event) {
+            if (event._host._id === user._id) {
+                renderEvent(event);
+            }
+        });
     });
-  });
 }
 
 //use handlebars to render the events
@@ -123,13 +138,13 @@ function getAllError(err) {
 }
 
 function handlePostEventSuccess(json) {
-  $('#eventModal').modal('hide');
-  $.ajax({
-      method: "GET",
-      url: '/api/events',
-      success: handleGetAllEvents,
-      error: getAllError
-  });
+    $('#eventModal').modal('hide');
+    $.ajax({
+        method: "GET",
+        url: '/api/events',
+        success: handleGetAllEvents,
+        error: getAllError
+    });
 }
 
 function newPostEventError(err) {
@@ -137,8 +152,8 @@ function newPostEventError(err) {
 }
 
 function updateUserSuccess(json) {
-  alert("User Profile Updated");
-  getAllEvents();
+    alert("User Profile Updated");
+    getAllEvents();
 }
 
 function updateUserError(err) {
@@ -150,7 +165,6 @@ function loginError(err) {
 }
 
 function handleEditEvent(json) {
-  console.log("Edit event", json);
     $('#eventModal').modal();
     $("#edit_date").val(convertDate(json.date));
     $("#edit_min_level").val(json.minimum_level);
@@ -162,39 +176,44 @@ function editEventError(err) {
 }
 
 function handleGetTheUser(user) {
-  $("#profile_name").val(user[0].name);
-  $("#profile_instrument").val(user[0].instrument);
-  $("#profile_level").val(user[0].level);
-  $("#profile_street_address").val(user[0].street_address);
-  $("#profile_city").val(user[0].city);
-  $("#profile_state").val(user[0].state);
-  $("#profile_zip").val(user[0].zip);
+    $("#profile_name").val(user[0].name);
+    $("#profile_instrument").val(user[0].instrument);
+    $("#profile_level").val(user[0].level);
+    $("#profile_street_address").val(user[0].street_address);
+    $("#profile_city").val(user[0].city);
+    $("#profile_state").val(user[0].state);
+    $("#profile_zip").val(user[0].zip);
 
-  }
+}
+
 function getTheUserError(err) {
     console.log("user not found error");
 }
 
 function handleUpdateEvent(json) {
-console.log(json);
-  $('#eventModal').modal('hide');
-  $.ajax({
-      method: "GET",
-      url: '/api/events',
-      success: handleGetAllEvents,
-      error: getAllError
-  });
+    $('#eventModal').modal('hide');
+    $.ajax({
+        method: "GET",
+        url: '/api/events',
+        success: handleGetAllEvents,
+        error: getAllError
+    });
 }
 
 function updateEventError(err) {
     console.log("could not update event error");
 }
 
-function convertDate(ugly) {
-   var month = ugly[5] + ugly[6];
-   var day =   ugly[8] + ugly[9];
-   var year =  ugly[0]+ugly[1]+ugly[2]+ugly[3];
+function deleteEventError(err) {
+    console.log("could not delete event error");
+}
 
-   var refinedDate = month+'/'+day+'/'+year;
-   return refinedDate;
+
+function convertDate(ugly) {
+    var month = ugly[5] + ugly[6];
+    var day = ugly[8] + ugly[9];
+    var year = ugly[0] + ugly[1] + ugly[2] + ugly[3];
+
+    var refinedDate = month + '/' + day + '/' + year;
+    return refinedDate;
 }

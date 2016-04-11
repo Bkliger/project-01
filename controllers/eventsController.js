@@ -38,7 +38,6 @@ function index(req, res) {
 }
 
 function update(req, res) {
-console.log(req.body, req.params._event_id)
     db.Event.update({
         _id: req.params._event_id
     }, {
@@ -50,15 +49,40 @@ console.log(req.body, req.params._event_id)
           if (err) {
               return console.log("user update error: " + err);
           }
-        console.log("update",updateEvent)
         res.json(updateEvent);
       });
   }
 
+//   function update1(req, res) {
+// console.log(req.body);
+//       db.Event.update({
+//           _id: req.params._event_id
+//       }, {
+//           // participants[req.body.index].player: req.body.player,
+//       }, {
+//           upsert: false
+//       }, function(err, updateEvent) {
+//             if (err) {
+//                 return console.log("user update error: " + err);
+//             }
+//           console.log("update",updateEvent);
+//           res.json(updateEvent);
+//         });
+//     }
 
 //get one event to edit
 function show(req, res) {
     db.Event.findById(req.params._event_id, function(err, event) {
+        if (err) {
+            return console.log("event not found: " + err);
+        }
+        res.json(event);
+    });
+}
+
+//delete event
+function delete1(req, res) {
+    db.Event.remove({_id: req.params._event_id}, function(err, event) {
         if (err) {
             return console.log("event not found: " + err);
         }
@@ -72,5 +96,8 @@ module.exports = {
     index: index,
     show: show,
     update: update,
+    delete: delete1,
+    // update1: update1,
+
 
 };

@@ -83,5 +83,9 @@ Database
 There are two models - users and events. A user can host and participate in many events
 and an event can have many participants (users). The application uses referencing in Mongo to accomplish this.
 
-Disapointments
+Disapointments/To Do's
 * I would have like to search on Date as well but could not get the returned json date to match my entered value.
+
+* Display translated levels everywhere. I do this in some places through a function but it would be more complicated to do it through handlebars.
+
+I could not get the event to update with participants - need help here.

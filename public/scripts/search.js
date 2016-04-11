@@ -24,6 +24,8 @@ $(document).ready(function() {
     $('#events').on('click', '.edit-event', function(event) {
       var $eventRow = $(event.target).closest('.event');
       var event_id = $eventRow.attr("data-event-id");
+      //store the event_id for latter use
+        $("#eventModal").data("event_id",{event_id: event_id});
         //use the show function in eventsController to get one event
       $.ajax({
           method: "GET",
@@ -36,11 +38,13 @@ $(document).ready(function() {
     //participant selection buttons
     $("#violin1Button").on('click', function(e){
       e.preventDefault();
+      //store the participant for latter use
+        $("#eventModal").data("participant",{participant: "violin1"});
       $.get('/api/me', function getUserData(user) {
         $.ajax({
             method: "GET",
             url: '/api/users/' + user._id,
-            success: handleViolin1User,
+            success: handleParticipant,
             error: getTheUserError
         });
       });
@@ -81,7 +85,7 @@ function handleEditEvent(json) {
 console.log(json);
     $('#eventModal').modal();
     $("#view_date").text(convertDate(json.date));
-    $("#view_level").text(json.minimum_level);
+    $("#view_level").text(translateLevel(json.minimum_level));
     $("#violin1").text(json.participants[0].player);
     $("#violin2").text(json.participants[1].player);
     $("#viola").text(json.participants[2].player);
@@ -102,12 +106,62 @@ function convertDate(ugly) {
    return refinedDate;
 }
 
-function handleViolin1User(json) {
-console.log(json);
-$('#eventModal').modal('hide');
+function handleParticipant(user) {
+  var data;
+  switch ($("#eventModal").data("participant").participant) {
+    case "violin1":
+      data = {index: 0, player: user};
+      break;
+    case "violin2":
+      data = {index: 1, player: user};
+      break;
+    case "viola":
+      data = {index: 2, player: user};
+      break;
+    case "cello":
+      data = {index: 3, player: user};
+      break;
+  }
 
+console.log(user);
+$('#eventModal').modal('hide');
+  event_id = $("#eventModal").data("event_id").event_id;
+  console.log('/api/events/' + event_id)
+$.ajax({
+    method: "PUT",
+    url: '/api/events1/' + event_id,
+    data: data,
+    success: handleUpdateEvent,
+    error: updateEventError
+});
 }
 
 function getTheUserError(err) {
     console.log("couldn't find the user error");
+}
+
+//Translate level
+function translateLevel(level){
+switch (level) {
+  case 1:
+    return niceLevel = "C-";
+  case 2:
+    return niceLevel = "C";
+  case 3:
+    return niceLevel = "C+";
+  case 4:
+    return niceLevel = "B-";
+  case 5:
+    return niceLevel = "B";
+  case 6:
+    return niceLevel = "B+";
+  case 7:
+    return niceLevel = "A-";
+  case 8:
+    return niceLevel = "A";
+  case 9:
+    return niceLevel = "A+";
+  case 10:
+    return niceLevel = "Professional";
+  }
 }
