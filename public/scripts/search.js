@@ -38,7 +38,7 @@ $(document).ready(function() {
     //participant selection buttons
     $("#violin1Button").on('click', function(e){
       e.preventDefault();
-      //store the participant for latter use
+      //store the participant for later use
         $("#eventModal").data("participant",{participant: "violin1"});
       $.get('/api/me', function getUserData(user) {
         $.ajax({

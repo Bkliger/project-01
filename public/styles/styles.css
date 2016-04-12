@@ -7,6 +7,11 @@ ul
 .btn{
   margin: 10px;
   background-color: #553311
+
+}
+
+.btn:hover {
+  background-color: #ccbb55;
 }
 
 .label, label.inline {
