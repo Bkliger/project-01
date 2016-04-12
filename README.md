@@ -79,7 +79,7 @@ app.get('/logout', function (req, res) {
 
 ER Diagram.
 
-Although the initial design called for a many to many relationship between users and events, the implementation only called for a 1 to many relationship with 1 event having a host(user) and up to 4 participants (users).
+Although the initial design called for a many to many relationship between users and events, the implementation only called for a 1 to many relationship with 1 event having a host (user) and up to 4 participants (users). The application uses referencing in Mongo to accomplish this.
 
 Stories
 
@@ -103,17 +103,13 @@ User information
 The user begins from either a signup (localhost:3000/signup) or login (localhost:3000/login).
 
 Unique challenges
-Users should only see those events that they have signed up for or that they are hosting. Their event list has to be sensitive to this and they should not be allowed to delete any event for which they are not the host. The application retrieves user information from the server before loading the Profile page and whenever the event list refreshes.
+Users should only see those events that they have signed up for or that they are hosting. The application retrieves user information from the server before loading the Profile page and whenever the event list refreshes.
 
-Database
-There are two models - users and events. A user can host and participate in many events
-and an event can have many participants (users). The application uses referencing in Mongo to accomplish this.
 
-Disapointments/To Do's
-* I would have like to search on Date as well but could not get the returned json date to match my entered value.
-
-* Display translated levels everywhere. I do this in some places through a function but it would be more complicated to do it through handlebars.
-
-* I could not get the event to update with participants - need help here.
+To Do's
 
 * logout
+
+* setting the status with some sort of custom mongo function.
+
+* the event list has to be sensitive to who is the host and should allow the user to delete any event for which they are not the host.
