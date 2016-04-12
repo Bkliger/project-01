@@ -43,6 +43,7 @@ app.get('/api/events/', controllers.eventsController.index);
 app.get('/api/events/:_event_id/', controllers.eventsController.show);
 app.put('/api/events/:_event_id/', controllers.eventsController.update);
 app.delete('/api/events/:_event_id/', controllers.eventsController.delete);
+app.put('/api/events1/:_event_id/', controllers.eventsController.update1);
 app.get('/api/users/:_id', controllers.usersController.show);
 --retrieves user information from signup or login--
 app.get('/api/me', function (req, res) {
@@ -75,6 +76,28 @@ app.get('/logout', function (req, res) {
   console.log("AFTER logout", req.user);
   res.redirect('/');
 });
+
+ER Diagram.
+
+Although the initial design called for a many to many relationship between users and events, the implementation only called for a 1 to many relationship with 1 event having a host(user) and up to 4 participants (users).
+
+Stories
+
+Story 1
+User Story 1 - User signs up is taken to a profile page where they can enter more detailed information about themselves including their playing level from a drop down. They then click the Save button and the data is saved. Required: all fields. If they have already signed up, they log in and are presented with their profile page and all events that they are hosting or have signed up to participate in.
+
+Story 2
+User Story 2 - On the User Profile window, the user clicks the Create New Event button. A modal Dialog Box pops up. The user fills in the date and the minimum level. There are 4 instruments for every event. The dialog box closes and the event is listed. If the user clicks the Cancel button, the modal dialog box closes and no changes are made to the event list.
+
+Story 3
+User Story 3 - edit an event - The user selects an event from the list on the User Profile window. An Event Information modal Dialog Box pops up. The Delete Button is visible. The user can edit all fields (they are still required). The user clicks the Save Event button and the dialog box closes and the event is listed on the User Profile window.
+
+Story 4
+User Story 4 - Delete an Event - on the Edit Event modal dialog box, the user clicks the Delete Event button. The event is deleted, the dialog box closes and the event is no longer displayed on the list in the User Profile window.
+
+Story 5
+User Story 5 - Search for an Event. From their profile page, the user clicks the search button and a search page is displayed. The match is made based on the date and city and the level of the user being equal to or greater than the minimum level.
+
 
 User information
 The user begins from either a signup (localhost:3000/signup) or login (localhost:3000/login).

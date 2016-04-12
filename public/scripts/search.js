@@ -104,18 +104,19 @@ console.log("rendering", event)
     var eventHtml = event_template(event);
     $("#events").prepend(eventHtml);
 }
-//I would have like to search on Date as well but could not get the returned json date to match my entered value.
-//convertDate(json.date).toString() === $("#date-picker").toString()&&
-function findEventsSuccess(json) {
-  $("#events").empty();
-  json.forEach(function(event) {
-    console.log("event date:", convertDate(event.date),"query date:", $("#search_date").val());
-    var dateMatch = convertDate(event.date) === $("#search_date").val();
-    var cityMatch = event._host.city === $("#query_city").val()
 
-  if (dateMatch && cityMatch) {
-      renderEvent(event);
-    }
+function findEventsSuccess(json) {
+  $.get('/api/me', function getUserData(user) {
+      $("#events").empty();
+    json.forEach(function(event) {
+      var goodLevel = (user.level>=event.minimum_level)
+      var dateMatch = convertDate(event.date) === $("#search_date").val();
+      var cityMatch = event._host.city === $("#query_city").val()
+
+    if (dateMatch && cityMatch && goodLevel) {
+        renderEvent(event);
+      }
+    });
   });
 }
 

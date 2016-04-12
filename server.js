@@ -25,6 +25,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 // passport config
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
@@ -78,7 +79,6 @@ app.put('/api/events/:_event_id/', controllers.eventsController.update);
 app.delete('/api/events/:_event_id/', controllers.eventsController.delete);
 app.put('/api/events1/:_event_id/', controllers.eventsController.update1);
 app.get('/api/users/:_id', controllers.usersController.show);
-// app.get('/api/events/', controllers.eventsController.search);
 app.get('/api/me', function (req, res) {
   res.json(req.user);
 });
