@@ -109,7 +109,6 @@ console.log("rendering", event)
 function findEventsSuccess(json) {
   $("#events").empty();
   json.forEach(function(event) {
-    console.log(event)
     console.log("event date:", convertDate(event.date),"query date:", $("#search_date").val());
     var dateMatch = convertDate(event.date) === $("#search_date").val();
     var cityMatch = event._host.city === $("#query_city").val()

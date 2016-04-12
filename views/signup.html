@@ -1,23 +1,42 @@
 <!DOCTYPE HTML>
 <html>
-  <head>
-      <title>Sign Up</title>
-  </head>
-  <body>
+<html lang="en">
 
+<head>
 
-  <h2>Sign Up</h2>
-  <br>
-  <form method="POST" action="/signup">
-    <div class="form-group">
-      <input type="text" name="username" class="form-control" placeholder="Username" autofocus>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Sign Up</title>
+
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+
+    <!-- VENDOR SCRIPTS -->
+    <script src="vendor/jQuery/dist/jquery.min.js"></script>
+    <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container main"
+      <div class="col-md-6 col-md-offset-1">
+        <h2 class="white">Sign Up</h2>
+        <br>
+        <form method="POST" action="/signup">
+            <div class="form-group col-md-6 col-md-offset-1">
+                <input type="text" name="username" class="form-control" placeholder="Username" autofocus>
+            </div>
+            <div class="form-group col-md-6 col-md-offset-1">
+                <input type="password" name="password" class="form-control" placeholder="Password">
+            </div>
+            <div class="form-group col-md-6 col-md-offset-1">
+                <input type="submit" class="btn btn-block btn-primary" value="Sign Up">
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-      <input type="password" name="password" class="form-control" placeholder="Password">
-    </div>
-    <div class="form-group">
-      <input type="submit" class="btn btn-block btn-primary" value="Sign Up">
-    </div>
-  </form>
-  </body>
+  </div>
+</body>
+
 </html>

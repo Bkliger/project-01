@@ -120,8 +120,15 @@ function handleGetAllEvents(json) {
     $("#events").empty();
     $.get('/api/me', function getUserData(user) {
         json.forEach(function(event) {
-            if (event._host._id === user._id) {
-              console.log(event)
+            var checkHost = (event._host._id === user._id);
+            var checkViolin1 = (event.violin1 === user._id);
+            var checkViolin2 = (event.violin2 === user._id);
+            var checkViola = (event.viola === user._id);
+            var checkCello = (event.cello === user._id);
+            if (checkHost||checkViolin1||checkViolin2||checkViola||checkCello)  {
+
+              event['date'] = convertDate(event.date)
+              event['minimum_level'] = translateLevel(event.minimum_level);
                 renderEvent(event);
             }
         });
@@ -166,10 +173,15 @@ function loginError(err) {
 }
 
 function handleEditEvent(json) {
+    console.log(json);
     $('#eventModal').modal();
     $("#edit_date").val(convertDate(json.date));
     $("#edit_min_level").val(json.minimum_level);
     $("#edit-event-title").text("Edit Event");
+    $("#violin1").text(json.violin1.name);
+    $("#violin2").text(json.violin2.name);
+    $("#viola").text(json.viola.name);
+    $("#cello").text(json.cello.name);
 }
 
 function editEventError(err) {
@@ -217,4 +229,30 @@ function convertDate(ugly) {
 
     var refinedDate = month + '/' + day + '/' + year;
     return refinedDate;
+}
+
+//Translate level
+function translateLevel(level){
+switch (level) {
+  case 1:
+    return niceLevel = "C-";
+  case 2:
+    return niceLevel = "C";
+  case 3:
+    return niceLevel = "C+";
+  case 4:
+    return niceLevel = "B-";
+  case 5:
+    return niceLevel = "B";
+  case 6:
+    return niceLevel = "B+";
+  case 7:
+    return niceLevel = "A-";
+  case 8:
+    return niceLevel = "A";
+  case 9:
+    return niceLevel = "A+";
+  case 10:
+    return niceLevel = "Professional";
+  }
 }

@@ -145,7 +145,7 @@ function update1(req, res) {
 
         function index(req, res) {
             db.Event.find()
-                .populate('_host')
+                .populate('_host violin1 violin2 viola cello')
                 .exec(function(err, events) {
                     if (err) {
                         return console.log("events error: " + err);

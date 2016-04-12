@@ -1,7 +1,12 @@
-
+ul
+{
+  display:flex;
+  list-style:none;
+}
 
 .btn{
   margin: 10px;
+  background-color: #553311
 }
 
 .label, label.inline {
@@ -9,6 +14,9 @@
     width: 50px;
 }
 
+.modal-background {
+    background-image: url("../images/mozart.jpeg");
+}
 .modal-admin {
     /* new custom width */
     width: 1000px;
@@ -17,46 +25,28 @@
 .black {
   color: black;
 }
+
+.red {
+  color: red;
+}
 .main {
-  background-image: url("../images/ID-10020343.png");
+  background-image: url("../images/6938519-Grunge-musical-background-Stock-Photo-music-sheet-background.jpg");
 }
 
 .white {
   color: white;
 }
 
+.inputLabel
+{
+	text-shadow: 2px 2px 2px black;
+	color: white;
+	font-size: 20px;
+  background-color: black;
+}
+
 
 input[type="text"] {
-  padding: 0 10px;
-  margin: 10px;
-}
-
-textarea {
-  width: 500px;
-  height: 200px;
-  padding: 20px;
-}
-
-textarea, input[type="text"], fieldset.elist ul, select, fieldset.elist > legend {
-  border: 2px #cccccc solid;
-  border-radius: 10px;
-}
-
-input[type="text"], fieldset.elist, select, fieldset.elist > legend {
-  height: 32px;
-  font-family: Tahoma;
-  font-size: 14px;
-}
-
-
-input[type="text"], fieldset.elist {
-  width: 316px;
-}
-
-input[type="text"]:focus {
-  background: #ffcccc url("data:image/gif;base64,R0lGODlhEAAQANU5APnoxuvr6+uxPdvb2+rq6ri4uO7qxunp6dPT06SHV+/rx8vLy+nezLO0sbe3t9Ksas+qaaCEV8rKyp2dnf39/QAAAK6ursifZHFxcc/Qzu3mxYyMjExCJnV1dc6maO7u7o+Pj2tXNoaGhtfDpKCDVu3lxM+tcaKEV9bW1qOFVWNjY8KrisTExNra2nBbObGxsby8vO/mu7Kyso9ZAuzs7MSgAIiKhf///8zMzP///wAAAAAAAAAAAAAAAAAAAAAAACH5BAEAADkALAAAAAAQABAAAAaXwJxwSCwOYzWkMpkkZmoAqDQaJdpqAqw2m53NRjlboAarFczomcE0C99o8DgNMVM8Tm3bbYDr9x11DwkzDG5yc2oQJIRCenx/MxoeETM2Q3pxATMlF4MYlo17OAsdLispMyAioIY0BzMcITMTKBasjgssFTMqGxItMjYUoTQBBAQHxgE0wZcfMtDRMi/QrA022NnaNg1CQQA7") no-repeat 2px center !important;
-}
-
-input[type="text"]:focus, textarea:focus, select:focus, fieldset.elist > legend {
   border: 2px #ccaaaa solid;
+  font-size: 15px
 }

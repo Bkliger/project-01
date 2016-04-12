@@ -23,13 +23,12 @@
 
 </head>
 
-<body class="main white">
+<body class="main red">
   <div class="container"
     <div class="row">
-      <div class="col-md-12 text-center col-md-offset-2">
+      <div id="profile" class="col-md-12 text-center inputLabel">
         <h1 >User Profile</h1>
-      </div>
-      <div id="profile" class="col-md-8 col-md-offset-2">
+        <br>
       </div>
     </div>
   </div>
@@ -37,10 +36,13 @@
 
 
   <div id="user">
-      <form class="form-inline" id="user_profile_form">
-        <div class="form-group col-md-offset-1">
+      <form class="form-inline inputLabel" id="user_profile_form">
+          <div class="form-group col-md-1">
+          </div>
+          <div class="form-group col-md-3">
           <label for="name">Full Name</label>
           <input type="text" class="form-control" id="profile_name" name="name" value="" required>
+          <br>
           <label for="instrument">Instrument</label>
           <select name="instrument" id="profile_instrument" class="black" required = "true" value="">
             <option value="1st Violin">1st Violin</option>
@@ -50,6 +52,7 @@
             <option value="Piano">Piano</option>
             <option value="Clarinet">Clarinet</option>
           </select>
+          <br>
           <label for="level">Level</label>
           <select name="level" value="" class="black"  id="profile_level" >
             <option value="10">Professional</option>
@@ -64,18 +67,21 @@
             <option value="1">C-</option>
           </select>
         </div>
-        <div class="form-group col-sm-offset-1">
+        <div class="form-group col-md-4">
 
           <label for="street_address">Street Address</label>
           <input type="text" class="form-control" id="profile_street_address" name="street_address" value="" required>
+          <br>
           <label for="city">City</label>
           <input type="text" class="form-control" name="city" id="profile_city" value="" required>
-          <div class="form-group-sm">
-            <label for="state">State</label>
-            <input type="text" class="form-control" name="state" id="profile_state" value="" required>
-          </div>
+          <br>
+          <label for="state">State</label>
+          <input type="text" class="form-control" name="state" id="profile_state" value="" required>
+          <br>
           <label for="zip_code">Zip Code</label>
           <input type="text" class="form-control" name="zip" id="profile_zip" value="" required>
+        </div>
+          <div class="form-group col-md-4">
         </div>
         <div class="col-md-4">
           <button id="saveButton" name="saveButton" class="btn btn-primary">Update User Data</button>
@@ -93,8 +99,8 @@
 
   <section class="container">
     <div class="row">
-      <div class="col-md-10 text-center col-md-offset-1">
-        <h2>Your Events</h2>
+      <div class="col-md-12 text-center">
+        <h2 class="inputLabel">Your Events</h2>
       </div>
     </div>
     <!-- events - this is where handelbars attaches -->
@@ -104,7 +110,7 @@
         <!-- one event -->
         <div class="row event" data-event-id={{_id}}>
 
-          <div class="col-md-10 col-md-offset-1">
+          <div class="col-md-12">
             <div class="panel panel-default">
               <div class="panel-body">
 
@@ -114,15 +120,35 @@
                 <div class='row'>
 
                   <div class="col-md-9 col-xs-12">
-                    <h4>Date:</h4>
-                    <span id='date'>{{date}}</span>
-                    <h4>Host Name:</h4>
-                    <span id='_host'>{{_host.name}}</span>
-                    <h4 >Status:</h4>
-                    <span id='status'>{{status}}</span>
-                    <h4 >Min Level:</h4>
-                    <span id='minimum_level'>{{minimum_level}}</span>
-                  `  <button class='btn btn-primary edit-event' id="edit-event">Edit Event</button>`
+                    <ul>
+                      <div class="col-md-2 col-xs-12">
+                        <li><h4>Date: </h4>&nbsp<span>{{date}}</span></li>
+                      </div>
+                      <div class="col-md-2 col-xs-12">
+                        <li><h4>Host Name: </h4>&nbsp<span>{{_host.name}}</span></li>
+                      </div>
+                      <div class="col-md-2 col-xs-12">
+                        <li><h4>Minimum Level: </h4>&nbsp<span>{{minimum_level}}</span></li>
+                      </div>
+                      <div class="col-md-2 col-xs-12">
+                        <li><h4>Status: </h4>&nbsp<span>{{status}}</span></li>
+                      </div>
+                      <div class="col-md-2 col-xs-12">
+                        <li><h4>1st Violin: </h4>&nbsp<span>{{violin1.name}}</span></li>
+                      </div>
+                      <div class="col-md-2 col-xs-12">
+                        <li><h4>2nd Violin: </h4>&nbsp<span>{{violin2.name}}</span></li>
+                      </div>
+                      <div class="col-md-2 col-xs-12">
+                        <li><h4>Viola: </h4>&nbsp<span>{{viola.name}}</span></li>
+                      </div>
+                      <div class="col-md-2 col-xs-12">
+                        <li><h4>Cello: </h4>&nbsp<span>{{cello.name}}</span></li>
+                      </div>
+                      <div class="col-md-2 col-xs-12">
+                        <button class='btn btn-primary edit-event' id="edit-event">Edit Event</button>
+                      </div>
+                    </ul>
                   </div>
                 </div>
                 <!-- end of event internal row -->
@@ -145,27 +171,20 @@
   <!-- begin eventModal: this is not visible until you call .modal() on it -->
 <div class="modal fade" tabindex="-1" role="dialog" id="eventModal" data>
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content main inputLabel">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 id="edit-event-title" class="modal-title black">Create Event</h4>
+        <h3 id="edit-event-title" class="modal-title">Create Event</h3>
       </div>
-      <div class="modal-body black">
+      <div class="modal-body">
         <form  id="newEventForm">
           <fieldset class='form-horizontal'>
             <!-- Text input-->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="edit_date">Event Date</label>
-              <div class="col-md-4">
+              <div class="col-md-7">
+                <label class="control-label" for="edit_date">Event Date</label>
                 <input id="edit_date" name="edit_date" type="text" placeholder="" class="form-control black" required="">
-              </div>
-            </div>
-
-            <!-- Text input-->
-
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="edit_min_level">Minimum Level</label>
-              <div class="col-md-4">
+                <label class="control-label" for="edit_min_level">Minimum Level</label>
                 <select name="edit_min_level" id ="edit_min_level" value="" class="form-control input-md">
                   <option value="10">Professional</option>
                   <option value="9">A+</option>
@@ -178,30 +197,18 @@
                   <option value="2">C</option>
                   <option value="1">C-</option>
                 </select>
+                <h4>1st Violin:<span id='violin1'></span></h4>
+                <h4>2nd Violin:<span id='violin2'></span></h4>
+                <h4 >Viola:<span id='viola'></span></h4>
+                <h4 >Cello:<span id='cello'></span></h4>
+
               </div>
             </div>
-            <div class="col-md-4">
-              <h4>1st Violin:</h4>
-              <span id='violin1'></span>
-              <h4>2nd Violin:</h4>
-              <span id='violin2'></span>
-              <h4 >Viola:</h4>
-              <span id='viola'></span>
-              <h4 >Cello:</h4>
-              <span id='cello'></span>
-            </div>
-
-
-            <!-- <script type="text/javascript">
-           $(function () {
-               $('#edit_date').datetimepicker();
-           });
-       </script> -->
           </fieldset>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" id="saveEvent">Save changes</button>
         <button type="button" class="btn btn-primary" id="deleteEvent">Delete Event</button>
       </div>

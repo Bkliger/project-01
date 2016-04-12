@@ -24,45 +24,51 @@
 
 </head>
 
-<body>
+<body class="main">
   <div class="container"
     <div class="row">
-      <div class="col-md-8 col-md-offset-2">
+      <div id="profile" class="col-md-12 text-center inputLabel">
         <h1>Search for an Event</h1>
       </div>
-      <div id="profile" class="col-md-8 col-md-offset-2">
+      <div class="col-md-12">
+        <h1></h1>
       </div>
     </div>
   </div>
 
-
-
   <div>
-    <form class="form-inline" id="search_form">
-      <div class="form-group">
+    <form class="form-inline inputLabel" id="search_form" >
+      <div class="form-group col-md-1">
+      </div>
+      <div class="form-group col-md-3">
         <label for="search_date">Date</label>
         <input type="text" id="search_date" class="form-control" name="search_date">
       </div>
+      <div class="form-group col-md-3">
         <label for="city">City</label>
         <input type="text" id="query_city" class="form-control" name="city">
       </div>
-      <div class="col-md-4">
+      <div class="form-group col-md-5">
+        <a href="/" class="btn btn-primary">Return to My List</a>
+      </div>
+      <div class="form-group text-center col-md-12">
         <button id="searchButton" name="searchButton" class="btn btn-primary">Search Events</button>
       </div>
+
     </form>
-    <a href="/" class="btn btn-primary">Return to My List</a>
+
   </div>
 
   <!-- event list -->
 
   <section class="container">
     <div class="row">
-      <div class="col-md-10 col-md-offset-1">
-        <h2>Matching Events</h2>
+      <div class="col-md-12 text-center">
+        <h2 class="inputLabel">Matching Events</h2>
       </div>
     </div>
     <!-- events - this is where handelbars attachs -->
-    <div id='events'>
+    <div id='events' class="black">
       <script id="event_template" type="text/x-handlebars-template">
 
 
@@ -70,34 +76,44 @@
         <!-- one event -->
         <div class="row event" data-event-id={{_id}}>
 
-          <div class="col-md-10 col-md-offset-1">
+          <div class="col-md-12">
             <div class="panel panel-default">
-              <div class="panel-body">
-
-
                 <!-- begin event internal row -->
-
+              <div class="panel-body">
                 <div class='row'>
-
-                  <div class="col-md-9 col-xs-12">
-                    <h4>Host Name:</h4>
-                    <span id='_host'>{{_host.name}}</span>
-                    <h4 >Status:</h4>
-                    <span id='status'>{{status}}</span>
-                    <h4 >Min Level:</h4>
-                    <span id='minimum_level'>{{minimum_level}}</span>
-                    <button class='btn btn-primary edit-event' id="view-event">View Event</button>
-                  </div>
+                  <ul>
+                    <div class="col-md-2 col-xs-12">
+                      <li><h4>Host Name: </h4>&nbsp<span>{{_host.name}}</span></li>
+                    </div>
+                    <div class="col-md-2 col-xs-12">
+                      <li><h4>Minimum Level: </h4>&nbsp<span>{{minimum_level}}</span></li>
+                    </div>
+                    <div class="col-md-2 col-xs-12">
+                      <li><h4>Status: </h4>&nbsp<span>{{status}}</span></li>
+                    </div>
+                    <div class="col-md-2 col-xs-12">
+                      <li><h4>1st Violin: </h4>&nbsp<span>{{violin1.name}}</span></li>
+                    </div>
+                    <div class="col-md-2 col-xs-12">
+                      <li><h4>2nd Violin: </h4>&nbsp<span>{{violin2.name}}</span></li>
+                    </div>
+                    <div class="col-md-2 col-xs-12">
+                      <li><h4>Viola: </h4>&nbsp<span>{{viola.name}}</span></li>
+                    </div>
+                    <div class="col-md-2 col-xs-12">
+                      <li><h4>Cello: </h4>&nbsp<span>{{cello.name}}</span></li>
+                    </div>
+                    <div class="col-md-2 col-xs-12">
+                      <button class='btn btn-primary edit-event' id="view-event">View Event</button>
+                    </div>
+                  </ul>
                 </div>
-                <!-- end of event internal row -->
-
               </div>
+                <!-- end of event internal row -->
             </div>
           </div>
         </div>
         <!-- end one event -->
-
-
       </script>
     </div>
   </section>
@@ -109,39 +125,29 @@
   <!-- begin eventModal: this is not visible until you call .modal() on it -->
 <div class="modal fade" tabindex="-1" role="dialog" id="eventModal">
   <div class="modal-dialog modal-admin">
-    <div class="modal-content">
+    <div class="modal-content main inputLabel">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">View Event</h4>
+        <h3 class="modal-title">View Event</h3>
       </div>
-      <div class="modal-body black">
+      <div class="modal-body">
         <div class="col-md-2">
-          <h4>Date:</h4>
-          <span id='view_date'>""</span>
-          <h4>Minimum Level:</h4>
-          <span id='view_level'>""</span>
+          <h4>Date:<span id='view_date'>""</span></h4>
+          <h4>Minimum Level:<span id='view_level'>""</span></h4>
         </div>
-        <div>
-          <h4>1st Violin:</h4>
-          <span id="violin1"></span>
+        <div class="col-md-3">
+          <h4>1st Violin:<span id="violin1"></span></h4>
           <button id="violin1Button" name="violin1Button" class="btn btn-primary" >Select</button>
-        </div>
-        <div>
-          <h4>2nd Violin:</h4>
-          <span id="violin2"></span>
+          <h4>2nd Violin:<span id="violin2"></span></h4>
           <button id="violin2Button" name="violin2Button" class="btn btn-primary" >Select</button>
-        </div><div>
-          <h4>Viola:</h4>
-          <span id="viola"></span>
+          <h4>Viola:<span id="viola"></span></h4>
           <button id="violaButton" name="violaButton" class="btn btn-primary" >Select</button>
-        </div><div>
-          <h4>Cello:</h4>
-          <span id="cello"></span>
+          <h4>Cello:<span id="cello"></span></h4>
           <button id="celloButton" name="celloButton" class="btn btn-primary" >Select</button>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" id="saveEvent">Save changes</button>
       </div>
     </div>
