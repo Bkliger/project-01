@@ -65,7 +65,6 @@ function update1(req, res) {
             res.json(updateEvent);
         });
     } else if (req.body.index === '1') {
-        console.log("inside if")
         db.Event.update({
             _id: req.params._event_id
         }, {
@@ -80,7 +79,7 @@ function update1(req, res) {
             res.json(updateEvent);
         });
       } else if (req.body.index === '2') {
-                console.log("inside if")
+
                 db.Event.update({
                     _id: req.params._event_id
                 }, {
@@ -95,7 +94,7 @@ function update1(req, res) {
                     res.json(updateEvent);
                 });
         } else if (req.body.index === '3') {
-                console.log("inside if")
+
                 db.Event.update({
                     _id: req.params._event_id
                 }, {
@@ -111,24 +110,6 @@ function update1(req, res) {
                 });
           }
         }
-
-        // // from Julianna
-        // function update1(req, res) {
-        // console.log(req.body);
-        //   db.Event.findById(req.params._event_id, function(err, foundEvent) {
-        //     console.log(foundEvent);
-        //     console.log(foundEvent.participants[0]);
-        //     foundEvent.participants[0]['player'] = req.body.player;
-        //
-        //     foundEvent.save(function(err, saved) {
-        //       // console.log('UPDATED', foundEvent.participants[0], 'IN ', saved.participants);
-        //       res.json(saved);
-        //     });
-        //   });
-        // };
-
-
-
 
         //get one event to edit
         function show(req, res) {
