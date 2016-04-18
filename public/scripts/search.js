@@ -1,3 +1,6 @@
+/* TODO: I am able to create events, however I do not see any events displayed after an ajax request is made to search for events by city or date.  Please refactor. -jc */
+
+
 $(document).ready(function() {
     console.log("search.js is loaded");
     $form = $("#search_form");
