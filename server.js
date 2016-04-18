@@ -104,8 +104,10 @@ app.post('/login', passport.authenticate('local'), function (req, res) {
 
 // log out user
 app.get('/logout', function (req, res) {
+  /*TODO: Please remove console messages in production verions - jc */
   console.log("BEFORE logout", req.user);
   req.logout();
+  /*TODO: Please remove console messages in production verions - jc */
   console.log("AFTER logout", req.user);
   res.redirect('/');
 });

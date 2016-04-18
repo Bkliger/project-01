@@ -9,12 +9,14 @@
 
   <!-- STYLESHEETS -->
   <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
+  <!-- TODO: remove unnecessary links to unused css files - this slows down the average page load time. -jc -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css">
   <link rel="stylesheet" href="styles/styles.css">
 
   <!-- VENDOR SCRIPTS -->
   <script src="vendor/jQuery/dist/jquery.min.js"></script>
   <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- TODO: remove unnecessary links to unused js files - this slows down the average page load time. -jc -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.js"></script>
   <script src="vendor/handlebars/handlebars.min.js"></script>
 
@@ -83,25 +85,35 @@
                 <div class='row'>
                   <ul>
                     <div class="col-md-2 col-xs-12">
-                      <li><h4>Host Name: </h4>&nbsp<span>{{_host.name}}</span></li>
+                      <li><h4>Host Name:
+                        <!-- TODO: complete html characters such as &nbsp; with a semicolon to prevent errors -jc --> </h4>&nbsp;<span>{{_host.name}}</span></li>
                     </div>
                     <div class="col-md-2 col-xs-12">
-                      <li><h4>Minimum Level: </h4>&nbsp<span>{{minimum_level}}</span></li>
+                      <li><h4>Minimum Level:
+                        <!-- TODO: complete html characters such as &nbsp; with a semicolon to prevent errors -jc -->
+                      </h4>&nbsp;<span>{{minimum_level}}</span></li>
                     </div>
                     <div class="col-md-2 col-xs-12">
-                      <li><h4>Status: </h4>&nbsp<span>{{status}}</span></li>
+                      <!-- TODO: complete html characters such as &nbsp; with a semicolon to prevent errors -jc -->
+                      <li><h4>Status: </h4>&nbsp;<span>{{status}}</span></li>
                     </div>
                     <div class="col-md-2 col-xs-12">
-                      <li><h4>1st Violin: </h4>&nbsp<span>{{violin1.name}}</span></li>
+                      <li><h4>1st Violin:
+                        <!-- TODO: complete html characters such as &nbsp; with a semicolon to prevent errors -jc -->
+                      </h4>&nbsp;<span>{{violin1.name}}</span></li>
                     </div>
                     <div class="col-md-2 col-xs-12">
-                      <li><h4>2nd Violin: </h4>&nbsp<span>{{violin2.name}}</span></li>
+                      <li><h4>2nd Violin:
+                        <!-- TODO: complete html characters such as &nbsp; with a semicolon to prevent errors -jc -->
+                      </h4>&nbsp;<span>{{violin2.name}}</span></li>
                     </div>
                     <div class="col-md-2 col-xs-12">
-                      <li><h4>Viola: </h4>&nbsp<span>{{viola.name}}</span></li>
+                      <!-- TODO: complete html characters such as &nbsp; with a semicolon to prevent errors -jc -->
+                      <li><h4>Viola: </h4>&nbsp;<span>{{viola.name}}</span></li>
                     </div>
                     <div class="col-md-2 col-xs-12">
-                      <li><h4>Cello: </h4>&nbsp<span>{{cello.name}}</span></li>
+                      <!-- TODO: complete html characters such as &nbsp; with a semicolon to prevent errors -jc -->
+                      <li><h4>Cello: </h4>&nbsp;<span>{{cello.name}}</span></li>
                     </div>
                     <div class="col-md-2 col-xs-12">
                       <button class='btn btn-primary edit-event' id="view-event">View Event</button>

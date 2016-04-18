@@ -4,6 +4,7 @@ $(document).ready(function() {
     //handlebars
     var source = $("#event_template").html();
     event_template = Handlebars.compile(source);
+    /* TODO: Remove unused or commented code from production versions -jc */
     // $("#date-picker").datepicker({});
 
     //initial load of index.html - get the user data and load profile page
@@ -115,7 +116,10 @@ function getAllEvents() {
     });
 }
 
-//creates each event row separately
+/* TODO: this is an impressive but non-functioning block of code.  The following error occurs when used: */
+  //app.js: Uncaught TypeError: Cannot read property '_id' of undefined
+/* the event objects do NOT have a _host object contained within them.*/
+
 function handleGetAllEvents(json) {
     $("#events").empty();
     $.get('/api/me', function getUserData(user) {
@@ -133,7 +137,7 @@ function handleGetAllEvents(json) {
             if (event.cello !== null) {
                 var checkCello = (event.cello._id === user._id);
             } else { checkCello = false}
-            
+
             if (checkHost||checkViolin1||checkViolin2||checkViola||checkCello)  {
 
               event['date'] = convertDate(event.date)
@@ -210,6 +214,7 @@ function handleGetTheUser(user) {
 
 function getTheUserError(err) {
     console.log("user not found error");
+    /* TODO: consider console logging an error to better understand why the error occured -c */
 }
 
 function handleUpdateEvent(json) {
@@ -224,10 +229,12 @@ function handleUpdateEvent(json) {
 
 function updateEventError(err) {
     console.log("could not update event error");
+    /* TODO: consider console logging an error to better understand why the error occured -c */
 }
 
 function deleteEventError(err) {
     console.log("could not delete event error");
+    /* TODO: consider console logging an error to better understand why the error occured -c */
 }
 
 
@@ -239,6 +246,11 @@ function convertDate(ugly) {
     var refinedDate = month + '/' + day + '/' + year;
     return refinedDate;
 }
+
+/* TODO: consider storing an array of strings
+  levelArray = ['C-', 'C', 'C+', 'B-', 'B', 'B+', 'A-', 'A', 'A+', 'Professional']
+  and accessing them via the level passed -1. This will speed up the funtion and require less code - jc*/
+  //Example : return levelArray[niceLevel-1];
 
 //Translate level
 function translateLevel(level){
