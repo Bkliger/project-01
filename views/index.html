@@ -26,7 +26,7 @@
 <body class="main red">
   <div class="container"
     <div class="row">
-      <div id="profile" class="col-md-12 text-center inputLabel">
+      <div id="profile" class="col-sm-12 text-center inputLabel">
         <h1 >User Profile</h1>
         <br>
       </div>
@@ -35,63 +35,71 @@
 
 
 
-  <div id="user">
-      <form class="form-inline inputLabel" id="user_profile_form">
-          <div class="form-group col-md-1">
+  <div id="user" class="row">
+    <div class="col-sm-12">
+      <form class="form-inline inputForm" id="user_profile_form">
+          <div class="form-group col-sm-3 col-md-offset-1 pull-left">
+            <div class="input-group-sm">
+              <label for="name">Full Name</label>
+              <input type="text" class="form-control" id="profile_name" name="name" value="" required>
+            </div>
+            <div class="input-group-sm">
+              <label for="instrument">Instrument</label>
+              <select name="instrument" id="profile_instrument" class="black" required = "true" value="">
+                <option value="1st Violin">1st Violin</option>
+                <option value="2nd Violin">2nd Violin</option>
+                <option value="Viola">Viola</option>
+                <option value="Cello">Cello</option>
+                <option value="Piano">Piano</option>
+                <option value="Clarinet">Clarinet</option>
+              </select>
+            </div>
+            <div class="input-group-sm">
+              <label for="level">Level</label>
+              <select name="level" value="" class="black"  id="profile_level" >
+                <option value="10">Professional</option>
+                <option value="9">A+</option>
+                <option value="8">A</option>
+                <option value="7">A-</option>
+                <option value="6">B+</option>
+                <option value="5">B</option>
+                <option value="4">B-</option>
+                <option value="3">C+</option>
+                <option value="2">C</option>
+                <option value="1">C-</option>
+              </select>
+            </div>
           </div>
-          <div class="form-group col-md-3">
-          <label for="name">Full Name</label>
-          <input type="text" class="form-control" id="profile_name" name="name" value="" required>
-          <br>
-          <label for="instrument">Instrument</label>
-          <select name="instrument" id="profile_instrument" class="black" required = "true" value="">
-            <option value="1st Violin">1st Violin</option>
-            <option value="2nd Violin">2nd Violin</option>
-            <option value="Viola">Viola</option>
-            <option value="Cello">Cello</option>
-            <option value="Piano">Piano</option>
-            <option value="Clarinet">Clarinet</option>
-          </select>
-          <br>
-          <label for="level">Level</label>
-          <select name="level" value="" class="black"  id="profile_level" >
-            <option value="10">Professional</option>
-            <option value="9">A+</option>
-            <option value="8">A</option>
-            <option value="7">A-</option>
-            <option value="6">B+</option>
-            <option value="5">B</option>
-            <option value="4">B-</option>
-            <option value="3">C+</option>
-            <option value="2">C</option>
-            <option value="1">C-</option>
-          </select>
-        </div>
-        <div class="form-group col-md-4">
 
-          <label for="street_address">Street Address</label>
-          <input type="text" class="form-control" id="profile_street_address" name="street_address" value="" required>
-          <br>
-          <label for="city">City</label>
-          <input type="text" class="form-control" name="city" id="profile_city" value="" required>
-          <br>
-          <label for="state">State</label>
-          <input type="text" class="form-control" name="state" id="profile_state" value="" required>
-          <br>
-          <label for="zip_code">Zip Code</label>
-          <input type="text" class="form-control" name="zip" id="profile_zip" value="" required>
-        </div>
-          <div class="form-group col-md-4">
-        </div>
-        <div class="col-md-4">
-          <button id="saveButton" name="saveButton" class="btn btn-primary">Update User Data</button>
-        </div>
-      </form>
-      <div class="col-md-4">
-        <button id="newEventButton" name="saveButton" class="btn btn-primary" >Create New Event</button>
-      </div>
-      <div class="col-md-4">
-        <a href="./search" class="btn btn-primary">Search for an Event</a>
+          <div class="form-group col-sm-4">
+            <div class="input-group-sm">
+              <label for="street_address">Street Address</label>
+              <input type="text" class="form-control" id="profile_street_address" name="street_address" value="" required>
+              <br>
+            </div>
+            <div class="input-group-sm">
+              <label for="city">City</label>
+              <input type="text" class="form-control" name="city" id="profile_city" value="" required>
+              <br>
+            </div>
+            <div class="input-group-sm">
+              <label for="state">State</label>
+              <input type="text" class="form-control" name="state" id="profile_state" value="" required>
+              <br>
+            </div>
+            <div class="input-group-sm">
+              <label for="zip_code">Zip Code</label>
+              <input type="text" class="form-control" name="zip" id="profile_zip" value="" required>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <button id="saveButton" name="saveButton" class="btn btn-primary">Update User Data</button>
+            <br>
+            <button id="newEventButton" name="saveButton" class="btn btn-primary" >Create New Event</button>
+            <br>
+            <a href="./search" class="btn btn-primary">Search for an Event</a>
+          </div>
+        </form>
       </div>
   </div>
 

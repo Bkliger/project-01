@@ -50,6 +50,13 @@ ul
   background-color: black;
 }
 
+.inputForm {
+  text-shadow: 2px 2px 2px black;
+	color: white;
+	font-size: 20px;
+  margin-left: 55px;
+}
+
 
 input[type="text"] {
   border: 2px #ccaaaa solid;
