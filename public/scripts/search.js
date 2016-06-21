@@ -223,6 +223,6 @@ switch (level) {
   case 9:
     return niceLevel = "A+";
   case 10:
-    return niceLevel = "Professional";
+    return niceLevel = "Pro";
   }
 }
