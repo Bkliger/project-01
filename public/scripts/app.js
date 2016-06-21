@@ -133,7 +133,7 @@ function handleGetAllEvents(json) {
             if (event.cello !== null) {
                 var checkCello = (event.cello._id === user._id);
             } else { checkCello = false}
-            
+
             if (checkHost||checkViolin1||checkViolin2||checkViola||checkCello)  {
 
               event['date'] = convertDate(event.date)
@@ -262,6 +262,6 @@ switch (level) {
   case 9:
     return niceLevel = "A+";
   case 10:
-    return niceLevel = "Professional";
+    return niceLevel = "Pro";
   }
 }
