@@ -16,18 +16,7 @@ $(document).ready(function() {
             error: getTheUserError
         });
     });
-    // alert($("#loaded").val())
-    // if ($("#loaded").val() != "true") {
-    //   console.log("test")
-    // }
-    // console.log('here')
-    //   if (req.user) {
-    //     console.log(req.user)
-    //
-    //   } else {
-    //     res.redirect('/login')
-    //   }
-    //load event list for that user right away
+
     getAllEvents();
 
     //Update user profile data
@@ -47,21 +36,22 @@ $(document).ready(function() {
 
 
     //click the logout on the profile page
-    $('#newEventButton').on('click', function(e) {
-      $.get('/api/me', function getUserData(user) {
-          var url = "/logout";
-          $.ajax({
-              method: 'GET',
-              data: user,
-              url: url,
-              success: handleLogoutSuccess,
-          });
-      });
-    });
+    // $('#newEventButton').on('click', function(e) {
+    //   $.get('/api/me', function getUserData(user) {
+    //       var url = "/logout";
+    //       $.ajax({
+    //           method: 'GET',
+    //           data: user,
+    //           url: url,
+    //           success: handleLogoutSuccess,
+    //       });
+    //   });
+    // });
 
 
     //click the new event button on the profile page
     $('#newEventButton').on('click', function(e) {
+      e.preventDefault();
       $("#eventModal").data("event_id", {
           event_id: "new"
       });
