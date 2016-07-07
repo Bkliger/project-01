@@ -12,6 +12,11 @@ ul
 
 }
 
+.font-size-sm{
+  font-size: 15px;
+
+}
+
 .login-btn{
   background-color: #1c1614;
   border: 1px solid white;
@@ -126,6 +131,10 @@ input[type="text"] {
     background-color: rgba(237, 236, 236, 0.48);
     border-radius: 4px;
     font-size: 1em;
+}
+
+.form-control {
+  font-size: 115px;
 }
 
 #aboutBanner{
