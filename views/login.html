@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Sign Up</title>
+  <title>Login</title>
 
   <!-- STYLESHEETS -->
   <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
@@ -24,23 +24,41 @@
 </head>
 
 <body>
-  <div class="container main"
-    <div class="col-md-6 col-md-offset-1">
-      <h2 class="white">Log In</h2>
-      <br>
-        <form method="POST" action="/login">
-        <div class="form-group col-md-6 col-md-offset-1">
-          <input type="text" name="username" class="form-control" placeholder="Username" autofocus>
-        </div>
-        <div class="form-group col-md-6 col-md-offset-1">
-          <input type="password" name="password" class="form-control" placeholder="Password">
-        </div>
-        <div class="form-group col-md-6 col-md-offset-1">
-          <input type="submit" class="btn btn-block btn-primary" value="Log In">
-        </div>
-      </form>
+  <div class="container" id="login">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3" id="aboutBanner">
+        <h1 id="aboutTitle"><b>Welcome to Chamber Match</b></h1></div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3" id="aboutText">
+        <h4>Let players know when you'll be getting together so they can join you and
+          join other players as you travel around the world.</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3">
+        <h2 class="white">Log In</h2>
+        <ul class="form-fields">
+
+          <form method="POST" action="/login">
+            <div class="field">
+              <input type="text" name="username" class="form-control" placeholder="Username" autofocus>
+            </div>
+            <div class="field">
+              <input type="password" name="password" class="form-control" placeholder="Password">
+            </div>
+            <div class="actions">
+              <input type="submit" class="btn btn-block btn-primary login-btn" value="Log In">
+            </div>
+            <div class="actions">
+                <a href="/signup" class="btn btn-block btn-primary login-btn">Sign Up</a>
+            </div>
+          </form>
+        </ul>
     </div>
   </div>
+</div>
 </body>
 
 </html>

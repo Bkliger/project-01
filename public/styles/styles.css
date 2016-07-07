@@ -7,11 +7,50 @@ ul
 }
 
 .btn{
-  margin: 10px;
-  background-color: #553311
+  background-color: #1c1614;
+  border: 1px solid white;
 
 }
 
+.font-size-sm{
+  font-size: 15px;
+
+}
+
+.login-btn{
+  background-color: #1c1614;
+  border: 1px solid white;
+}
+
+h1.transparant {
+  color: white;
+  text-shadow: 2px 2px 2px black;
+}
+
+#profile {
+    background-color: rgba(237, 236, 236, 0.64);
+    align-self: center;
+
+}
+
+#login {
+
+    height:100vh;
+    min-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    background-image: url("../images/photo-1465847899084-d164df4dedc6.jpg");
+    background-size: cover;
+}
+
+#signup {
+
+    height:100vh;
+    min-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    background-image: url("../images/photo-1465847899084-d164df4dedc6.jpg");
+    background-size: cover;
 }
 .btn:hover {
   background-color: #ccbb55;
@@ -34,12 +73,25 @@ ul
   color: black;
 }
 
+
+
 .red {
   color: red;
 }
 .main {
-  background-image: url("../images/6938519-Grunge-musical-background-Stock-Photo-music-sheet-background.jpg");
+  height:100vh;
+  min-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  background-image: url("../images/photo-1460036521480-ff49c08c2781.jpg");
+  background-size: cover;
 }
+
+.panel {
+  background-color: rgba(237, 236, 236, 0.64);
+
+}
+
 
 .white {
   color: white;
@@ -54,7 +106,7 @@ ul
 	text-shadow: 2px 2px 2px black;
 	color: white;
 	font-size: 20px;
-  background-color: black;
+  background-color: #1c1614;
 }
 
 .inputForm {
@@ -69,3 +121,89 @@ input[type="text"] {
   border: 2px #ccaaaa solid;
   font-size: 15px
 }
+
+#aboutText{
+    text-align: center;
+    color: white;
+    /*color:#272b30;*/
+    line-height: 1.75em;
+    font-weight: bolder;
+    background-color: rgba(237, 236, 236, 0.48);
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.form-control {
+  font-size: 115px;
+}
+
+#aboutBanner{
+      color: white;
+    /*color: #272b30;*/
+    margin-top: 10px;
+    text-align: center;
+    background-color: rgba(237, 236, 236, 0.48);
+}
+
+#aboutTitle{
+  font-size: 50px;
+
+}
+
+.navcaret{
+    text-align: top;
+    padding: 0;
+    /*margin-bottom: 400px;*/
+}
+.fa-caret-down{
+    text-decoration: none;
+}
+
+i .fa .fa-caret-down .fa-2x{
+    padding: 0;
+    margin-top: 0px;
+    vertical-align: top;
+    color: aqua;
+}
+
+.caret {
+    margin-top: 30px;
+    margin-left: 20px;
+    border-width: 12px;
+    color: black;
+  }
+
+
+ul.dropdown-menu {
+      color: black;
+      background-color: white;
+      text-align: left;
+      text-shadow: none;
+      padding-top: 0px;
+      padding-bottom: 0px;
+      white-space: nowrap;
+
+}
+
+.set-width{
+  width: 180px;
+  margin-left: -40px;
+}
+.block {
+  display: inline-block;
+}
+.dropdown {
+    color: black;
+}
+#searchButton{
+  margin-top: 10px;
+  margin-bottom: -10px;
+}
+
+
+
+/** {
+background: #000 !important;
+color: #0f0 !important;
+outline: solid #f00 1px !important;
+}*/

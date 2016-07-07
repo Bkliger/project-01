@@ -8,6 +8,7 @@ $(document).ready(function() {
 
     //initial load of index.html - get the user data and load profile page
     $.get('/api/me', function getUserData(user) {
+      console.log(user)
         $.ajax({
             method: "GET",
             url: '/api/users/' + user._id,
@@ -15,7 +16,7 @@ $(document).ready(function() {
             error: getTheUserError
         });
     });
-    //load event list for that user right away
+
     getAllEvents();
 
     //Update user profile data
@@ -34,8 +35,23 @@ $(document).ready(function() {
     });
 
 
+    //click the logout on the profile page
+    // $('#newEventButton').on('click', function(e) {
+    //   $.get('/api/me', function getUserData(user) {
+    //       var url = "/logout";
+    //       $.ajax({
+    //           method: 'GET',
+    //           data: user,
+    //           url: url,
+    //           success: handleLogoutSuccess,
+    //       });
+    //   });
+    // });
+
+
     //click the new event button on the profile page
     $('#newEventButton').on('click', function(e) {
+      e.preventDefault();
       $("#eventModal").data("event_id", {
           event_id: "new"
       });
@@ -198,6 +214,7 @@ function editEventError(err) {
 }
 
 function handleGetTheUser(user) {
+    $("#loaded").val(1);
     $("#profile_name").val(user[0].name);
     $("#profile_instrument").val(user[0].instrument);
     $("#profile_level").val(user[0].level);
@@ -209,7 +226,8 @@ function handleGetTheUser(user) {
 }
 
 function getTheUserError(err) {
-    console.log("user not found error");
+  console.log("get the user error")
+    alert("Please Log In");
 }
 
 function handleUpdateEvent(json) {
@@ -265,3 +283,7 @@ switch (level) {
     return niceLevel = "Pro";
   }
 }
+
+function handleLogoutSuccess() {
+
+};

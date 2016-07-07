@@ -44,7 +44,12 @@ var controllers = require('./controllers');
 //HTML Routes
 //load index.html
 app.get('/', function homepage (req, res) {
-  res.sendFile(__dirname + '/views/index.html');
+  if (req.user) {
+    res.sendFile(__dirname + '/views/index.html');
+  } else {
+    res.sendFile(__dirname + '/views/login.html');
+  }
+
 });
 
 
@@ -60,6 +65,10 @@ app.get('/login', function (req, res) {
   res.sendFile(__dirname + '/views/login.html');
 });
 
+// show login error view
+app.get('/loginError', function (req, res) {
+  res.sendFile(__dirname + '/views/loginError.html');
+});
 // Show search page
 app.get('/search', function (req, res){
   res.sendFile(__dirname + '/views/search.html');
@@ -98,16 +107,17 @@ app.post('/signup', function (req, res) {
 });
 
 // log in user
-app.post('/login', passport.authenticate('local'), function (req, res) {
-  res.redirect('/');
-});
+app.post('/login',
+  passport.authenticate('local', { successRedirect: '/',
+                                   failureRedirect: '/loginError' }));
+
 
 // log out user
 app.get('/logout', function (req, res) {
   console.log("BEFORE logout", req.user);
   req.logout();
   console.log("AFTER logout", req.user);
-  res.redirect('/');
+  res.redirect('/login');
 });
 
 
