@@ -9,6 +9,7 @@
 
   <!-- STYLESHEETS -->
   <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
+  <link type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css">
   <link rel="stylesheet" href="styles/styles.css">
 
@@ -26,8 +27,21 @@
 <body class="main red">
   <div class="container"
     <div class="row">
-      <div id="profile" class="col-sm-12 text-center inputLabel">
-        <h1 >User Profile</h1>
+      <div id="profile" class="col-sm-12 ">
+        <ul class="col-sm-12">
+          <li class="col-sm-12">
+            <h1 class="transparant"><center>Player Profile</center></h1>
+          </li>
+          <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                  <li class="block"><a href="/login">Login</a></li>
+                  <li class="block"><a href="/logout">Logout</a></li>
+              </ul>
+          </li>
+        </ul>
         <br>
       </div>
     </div>
@@ -42,6 +56,7 @@
             <div class="input-group-sm">
               <label for="name">Full Name</label>
               <input type="text" class="form-control" id="profile_name" name="name" value="" required>
+                        <input type="hidden" id="loaded" value="0">
             </div>
             <div class="input-group-sm">
               <label for="instrument">Instrument</label>
@@ -98,6 +113,11 @@
             <button id="newEventButton" name="saveButton" class="btn btn-primary" >Create New Event</button>
             <br>
             <a href="./search" class="btn btn-primary">Search for an Event</a>
+              <br>
+            <div class="form-group col-md-4">
+
+              <!-- <button id="saveButton" name="saveButton" class="btn btn-primary">Logout</button> -->
+            </div>
           </div>
         </form>
       </div>

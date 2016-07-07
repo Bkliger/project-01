@@ -44,7 +44,12 @@ var controllers = require('./controllers');
 //HTML Routes
 //load index.html
 app.get('/', function homepage (req, res) {
-  res.sendFile(__dirname + '/views/index.html');
+  if (req.user) {
+    res.sendFile(__dirname + '/views/index.html');
+  } else {
+    res.sendFile(__dirname + '/views/login.html');  
+  }
+
 });
 
 
@@ -107,7 +112,7 @@ app.get('/logout', function (req, res) {
   console.log("BEFORE logout", req.user);
   req.logout();
   console.log("AFTER logout", req.user);
-  res.redirect('/');
+  res.redirect('/login');
 });
 
 
