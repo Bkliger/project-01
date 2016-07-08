@@ -136,6 +136,7 @@ function handleGetAllEvents(json) {
     $("#events").empty();
     $.get('/api/me', function getUserData(user) {
         json.forEach(function(event) {
+
             var checkHost = (event._host._id === user._id);
             if (event.violin1 !== null) {
                 var checkViolin1 = (event.violin1._id === user._id);
